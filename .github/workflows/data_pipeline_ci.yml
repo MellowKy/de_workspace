@@ -38,6 +38,8 @@ jobs:
         run: uv run --no-project sqlfluff lint 03_projects/02_elt_duckdb_dbt/models/ --dialect duckdb || true
 
       - name: Pre-Generate Data Lake Parquet Files
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: uv run --no-project python3 03_projects/05_realtime_lakehouse/realtime_lakehouse.py
 
       - name: Build & Test dbt Models
@@ -58,6 +60,8 @@ jobs:
           uv run --no-project dbt test --profiles-dir ~/.dbt
 
       - name: Execute Dagster Software-Defined Asset Orchestration
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           cd 03_projects/06_dagster_orchestration
           uv run --no-project dagster asset materialize --select "*" -f repository.py
