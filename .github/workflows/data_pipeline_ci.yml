@@ -32,13 +32,13 @@ jobs:
         run: uv sync --no-install-project
 
       - name: Run Ruff Python Linter
-        run: uv run ruff check .
+        run: uv run --no-project ruff check .
 
       - name: Run SQLFluff Quality Checks
-        run: uv run sqlfluff lint 03_projects/02_elt_duckdb_dbt/models/ --dialect duckdb || true
+        run: uv run --no-project sqlfluff lint 03_projects/02_elt_duckdb_dbt/models/ --dialect duckdb || true
 
       - name: Pre-Generate Data Lake Parquet Files
-        run: uv run python3 03_projects/05_realtime_lakehouse/realtime_lakehouse.py
+        run: uv run --no-project python3 03_projects/05_realtime_lakehouse/realtime_lakehouse.py
 
       - name: Configure Transient dbt Profile & Build Models
         run: |
@@ -54,8 +54,8 @@ jobs:
           PROFILE
           
           cd 03_projects/02_elt_duckdb_dbt
-          uv run dbt run --profiles-dir ~/.dbt
-          uv run dbt test --profiles-dir ~/.dbt
+          uv run --no-project dbt run --profiles-dir ~/.dbt
+          uv run --no-project dbt test --profiles-dir ~/.dbt
 
   terraform-infrastructure:
     name: Validate Infrastructure as Code
