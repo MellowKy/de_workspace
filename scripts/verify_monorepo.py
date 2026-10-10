@@ -1,5 +1,6 @@
 import subprocess
 import sys
+from pathlib import Path
 
 
 def run_step(name, command):
@@ -12,11 +13,29 @@ def run_step(name, command):
         sys.exit(1)
 
 
+def verify_docs():
+    print("==> [CHECK] Verifying Architecture & Governance Documentation...")
+    required_docs = [
+        "01_research/adrs/ADR-001-polars-vs-pyspark-stream-ingestion.md",
+        "01_research/adrs/ADR-002-duckdb-dbt-vs-snowflake-warehouse.md",
+        "01_research/adrs/ADR-003-dagster-sda-vs-airflow-dag.md",
+        "04_docs/data_dictionaries/lakehouse_data_dictionary.md",
+        "04_docs/runbooks/incident_response_playbook.md",
+        "ARCHITECTURE.md",
+    ]
+    for doc in required_docs:
+        if not Path(doc).exists():
+            print(f"[FAIL] Missing Required Documentation Asset: {doc}")
+            sys.exit(1)
+    print("[OK] Architecture & Governance Documentation Verified.")
+
+
 def main():
     print("==================================================")
     print(" EPDP Monorepo Platform Health Check Verification ")
     print("==================================================")
 
+    verify_docs()
     run_step("Python & SQL Quality Gates", "uv run --no-project ruff check .")
     run_step(
         "Real-Time Polars Lakehouse",
@@ -44,7 +63,7 @@ def main():
     )
 
     print("==================================================")
-    print("[SUCCESS] All Monorepo Modules Operational & Validated!")
+    print("[SUCCESS] All Monorepo Modules & Governance Verified!")
 
 
 if __name__ == "__main__":
