@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: stg_github_events
+    columns:
+      - name: event_id
+        tests:
+          - unique
+          - not_null
+
+  - name: fct_github_activity
+    columns:
+      - name: event_type
+        tests:
+          - not_null

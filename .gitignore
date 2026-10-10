@@ -1,0 +1,22 @@
+# Local Data Scratch Space & Storage Binaries
+.data_scratch/
+*.duckdb
+*.duckdb.wal
+*.parquet
+*.csv
+*.json
+*.arrow
+
+# Environments & State
+.venv/
+venv/
+__pycache__/
+*.pyc
+.terraform/
+*.tfstate
+*.tfstate.backup
+
+# IDE Artifacts
+.vscode/
+.idea/
+.DS_Store

@@ -1,0 +1,454 @@
+[0m20:50:02.000042 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10d733b60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10df96c30>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10df95b80>]}
+
+
+============================== 20:50:02.018660 | b415e106-69dd-49f9-beab-5c64c2aa0d15 ==============================
+[0m20:50:02.018660 [info ] [MainThread]: Running with dbt=1.12.5
+[0m20:50:02.018904 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'empty': 'False', 'use_experimental_parser': 'False', 'fail_fast': 'False', 'log_format': 'default', 'log_cache_events': 'False', 'invocation_command': 'dbt run --project-dir . --profiles-dir /Users/kyreesullivan/.dbt', 'no_print': 'None', 'indirect_selection': 'eager', 'version_check': 'True', 'introspect': 'True', 'maximum_seed_size_mib': '1', 'send_anonymous_usage_stats': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'quiet': 'False', 'log_path': 'logs', 'cache_selected_only': 'False', 'hints_enabled': 'True', 'profiles_dir': '/Users/kyreesullivan/.dbt', 'target_path': 'None', 'use_colors': 'True', 'printer_width': '80', 'write_json': 'True', 'debug': 'False', 'partial_parse': 'True', 'warn_error': 'None'}
+[0m20:50:02.751617 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'b415e106-69dd-49f9-beab-5c64c2aa0d15', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10df996a0>]}
+[0m20:50:02.775368 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'b415e106-69dd-49f9-beab-5c64c2aa0d15', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10da1bbc0>]}
+[0m20:50:02.778080 [info ] [MainThread]: Registered adapter: duckdb=1.11.0
+[0m20:50:02.971867 [debug] [MainThread]: checksum: 7eb63d45f11b42189429e0e90b0539decb8b3768d2c7ec15eddd00df57731bed, vars: {}, profile: analytics_warehouse, target: dev, version: 1.12.5
+[0m20:50:02.972276 [info ] [MainThread]: Unable to do partial parsing because saved manifest not found. Starting full parse.
+[0m20:50:02.972432 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': 'b415e106-69dd-49f9-beab-5c64c2aa0d15', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10e13d220>]}
+[0m20:50:03.536313 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'b415e106-69dd-49f9-beab-5c64c2aa0d15', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10e3d05f0>]}
+[0m20:50:03.574016 [debug] [MainThread]: Wrote artifact WritableManifest to ./target/manifest.json
+[0m20:50:03.575564 [debug] [MainThread]: Wrote artifact SemanticManifest to ./target/semantic_manifest.json
+[0m20:50:03.594757 [debug] [MainThread]: Wrote artifact OsiDocument to ./target/osi_document.json
+[0m20:50:03.614731 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'b415e106-69dd-49f9-beab-5c64c2aa0d15', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10e96c800>]}
+[0m20:50:03.614923 [info ] [MainThread]: Found 2 models, 3 data tests, 500 macros
+[0m20:50:03.615047 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'b415e106-69dd-49f9-beab-5c64c2aa0d15', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10e9737a0>]}
+[0m20:50:03.615741 [info ] [MainThread]: 
+[0m20:50:03.615871 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m20:50:03.615965 [info ] [MainThread]: 
+[0m20:50:03.616157 [debug] [MainThread]: Acquiring new duckdb connection 'master'
+[0m20:50:03.618036 [debug] [ThreadPool]: Acquiring new duckdb connection 'list_analytics_lakehouse'
+[0m20:50:03.652414 [debug] [ThreadPool]: Using duckdb connection "list_analytics_lakehouse"
+[0m20:50:03.652710 [debug] [ThreadPool]: On list_analytics_lakehouse: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "analytics_warehouse", "target_name": "dev", "connection_name": "list_analytics_lakehouse"} */
+
+    
+    select schema_name
+    from system.information_schema.schemata
+    
+    where lower(catalog_name) = '"analytics_lakehouse"'
+    
+  
+  
+[0m20:50:03.652815 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m20:50:03.659367 [debug] [ThreadPool]: SQL status: OK in 0.007 seconds
+[0m20:50:03.659972 [debug] [ThreadPool]: On list_analytics_lakehouse: Close
+[0m20:50:03.660285 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_analytics_lakehouse, now create_analytics_lakehouse_main)
+[0m20:50:03.660470 [debug] [ThreadPool]: Creating schema "database: "analytics_lakehouse"
+schema: "main"
+"
+[0m20:50:03.663448 [debug] [ThreadPool]: Using duckdb connection "create_analytics_lakehouse_main"
+[0m20:50:03.663563 [debug] [ThreadPool]: On create_analytics_lakehouse_main: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "analytics_warehouse", "target_name": "dev", "connection_name": "create_analytics_lakehouse_main"} */
+
+    
+        select type from duckdb_databases()
+        where lower(database_name)='analytics_lakehouse'
+        and type != 'duckdb'
+    
+  
+[0m20:50:03.663660 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m20:50:03.663982 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m20:50:03.664449 [debug] [ThreadPool]: Using duckdb connection "create_analytics_lakehouse_main"
+[0m20:50:03.664546 [debug] [ThreadPool]: On create_analytics_lakehouse_main: BEGIN
+[0m20:50:03.664675 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m20:50:03.664763 [debug] [ThreadPool]: Using duckdb connection "create_analytics_lakehouse_main"
+[0m20:50:03.664853 [debug] [ThreadPool]: On create_analytics_lakehouse_main: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "analytics_warehouse", "target_name": "dev", "connection_name": "create_analytics_lakehouse_main"} */
+
+    
+    
+        create schema if not exists "analytics_lakehouse"."main"
+    
+[0m20:50:03.665060 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m20:50:03.665345 [debug] [ThreadPool]: On create_analytics_lakehouse_main: COMMIT
+[0m20:50:03.665445 [debug] [ThreadPool]: Using duckdb connection "create_analytics_lakehouse_main"
+[0m20:50:03.665532 [debug] [ThreadPool]: On create_analytics_lakehouse_main: COMMIT
+[0m20:50:03.665652 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m20:50:03.665743 [debug] [ThreadPool]: On create_analytics_lakehouse_main: Close
+[0m20:50:03.666160 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly create_analytics_lakehouse_main, now list_analytics_lakehouse_main)
+[0m20:50:03.667889 [debug] [ThreadPool]: Using duckdb connection "list_analytics_lakehouse_main"
+[0m20:50:03.667990 [debug] [ThreadPool]: On list_analytics_lakehouse_main: BEGIN
+[0m20:50:03.668075 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m20:50:03.668244 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m20:50:03.668332 [debug] [ThreadPool]: Using duckdb connection "list_analytics_lakehouse_main"
+[0m20:50:03.668431 [debug] [ThreadPool]: On list_analytics_lakehouse_main: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "analytics_warehouse", "target_name": "dev", "connection_name": "list_analytics_lakehouse_main"} */
+select
+      'analytics_lakehouse' as database,
+      table_name as name,
+      table_schema as schema,
+      CASE table_type
+        WHEN 'BASE TABLE' THEN 'table'
+        WHEN 'VIEW' THEN 'view'
+        WHEN 'LOCAL TEMPORARY' THEN 'table'
+        END as type
+    from system.information_schema.tables
+    where lower(table_schema) = 'main'
+    and lower(table_catalog) = 'analytics_lakehouse'
+  
+[0m20:50:03.669763 [debug] [ThreadPool]: SQL status: OK in 0.001 seconds
+[0m20:50:03.670175 [debug] [ThreadPool]: On list_analytics_lakehouse_main: ROLLBACK
+[0m20:50:03.670312 [debug] [ThreadPool]: On list_analytics_lakehouse_main: Close
+[0m20:50:03.670499 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'b415e106-69dd-49f9-beab-5c64c2aa0d15', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10e3ec950>]}
+[0m20:50:03.670660 [debug] [MainThread]: Using duckdb connection "master"
+[0m20:50:03.670749 [debug] [MainThread]: On master: BEGIN
+[0m20:50:03.670833 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m20:50:03.671004 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m20:50:03.671095 [debug] [MainThread]: On master: COMMIT
+[0m20:50:03.671179 [debug] [MainThread]: Using duckdb connection "master"
+[0m20:50:03.671261 [debug] [MainThread]: On master: COMMIT
+[0m20:50:03.671399 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m20:50:03.671488 [debug] [MainThread]: On master: Close
+[0m20:50:03.673834 [debug] [Thread-1 (]: Began running node model.analytics_warehouse.stg_github_events
+[0m20:50:03.674027 [info ] [Thread-1 (]: 1 of 2 START sql view model main.stg_github_events ............................. [RUN]
+[0m20:50:03.674202 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_analytics_lakehouse_main, now model.analytics_warehouse.stg_github_events)
+[0m20:50:03.674320 [debug] [Thread-1 (]: Began compiling node model.analytics_warehouse.stg_github_events
+[0m20:50:03.676359 [debug] [Thread-1 (]: Writing injected SQL for node "model.analytics_warehouse.stg_github_events"
+[0m20:50:03.676721 [debug] [Thread-1 (]: Began executing node model.analytics_warehouse.stg_github_events
+[0m20:50:03.687742 [debug] [Thread-1 (]: Writing runtime sql for node "model.analytics_warehouse.stg_github_events"
+[0m20:50:03.688129 [debug] [Thread-1 (]: Using duckdb connection "model.analytics_warehouse.stg_github_events"
+[0m20:50:03.688254 [debug] [Thread-1 (]: On model.analytics_warehouse.stg_github_events: BEGIN
+[0m20:50:03.688363 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m20:50:03.688559 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m20:50:03.688671 [debug] [Thread-1 (]: Using duckdb connection "model.analytics_warehouse.stg_github_events"
+[0m20:50:03.688795 [debug] [Thread-1 (]: On model.analytics_warehouse.stg_github_events: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "analytics_warehouse", "target_name": "dev", "node_id": "model.analytics_warehouse.stg_github_events"} */
+
+  
+  create view "analytics_lakehouse"."main"."stg_github_events__dbt_tmp" as (
+    WITH raw_data AS (
+    SELECT * 
+    FROM read_parquet('/Users/kyreesullivan/de_workspace/.data_scratch/processed/parquet/*.parquet')
+)
+
+SELECT
+    event_id::BIGINT AS event_id,
+    event_type::VARCHAR AS event_type,
+    actor::VARCHAR AS actor_username,
+    repo::VARCHAR AS repository_name,
+    event_date::DATE AS event_date,
+    event_time::VARCHAR AS event_time
+FROM raw_data
+WHERE event_id IS NOT NULL
+  );
+
+[0m20:50:03.689823 [debug] [Thread-1 (]: SQL status: OK in 0.001 seconds
+[0m20:50:03.691728 [debug] [Thread-1 (]: Using duckdb connection "model.analytics_warehouse.stg_github_events"
+[0m20:50:03.691850 [debug] [Thread-1 (]: On model.analytics_warehouse.stg_github_events: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "analytics_warehouse", "target_name": "dev", "node_id": "model.analytics_warehouse.stg_github_events"} */
+alter view "analytics_lakehouse"."main"."stg_github_events__dbt_tmp" rename to "stg_github_events"
+[0m20:50:03.692076 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m20:50:03.696512 [debug] [Thread-1 (]: On model.analytics_warehouse.stg_github_events: COMMIT
+[0m20:50:03.696636 [debug] [Thread-1 (]: Using duckdb connection "model.analytics_warehouse.stg_github_events"
+[0m20:50:03.696740 [debug] [Thread-1 (]: On model.analytics_warehouse.stg_github_events: COMMIT
+[0m20:50:03.697070 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m20:50:03.698681 [debug] [Thread-1 (]: Using duckdb connection "model.analytics_warehouse.stg_github_events"
+[0m20:50:03.698799 [debug] [Thread-1 (]: On model.analytics_warehouse.stg_github_events: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "analytics_warehouse", "target_name": "dev", "node_id": "model.analytics_warehouse.stg_github_events"} */
+
+      drop view if exists "analytics_lakehouse"."main"."stg_github_events__dbt_backup" cascade
+    
+[0m20:50:03.699005 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m20:50:03.700008 [debug] [Thread-1 (]: On model.analytics_warehouse.stg_github_events: Close
+[0m20:50:03.700971 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'b415e106-69dd-49f9-beab-5c64c2aa0d15', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10f0e8530>]}
+[0m20:50:03.701214 [info ] [Thread-1 (]: 1 of 2 OK created sql view model main.stg_github_events ........................ [[32mOK[0m in 0.03s]
+[0m20:50:03.701432 [debug] [Thread-1 (]: Finished running node model.analytics_warehouse.stg_github_events
+[0m20:50:03.701701 [debug] [Thread-3 (]: Began running node model.analytics_warehouse.fct_github_activity
+[0m20:50:03.701865 [info ] [Thread-3 (]: 2 of 2 START sql table model main.fct_github_activity .......................... [RUN]
+[0m20:50:03.702095 [debug] [Thread-3 (]: Acquiring new duckdb connection 'model.analytics_warehouse.fct_github_activity'
+[0m20:50:03.702215 [debug] [Thread-3 (]: Began compiling node model.analytics_warehouse.fct_github_activity
+[0m20:50:03.702855 [debug] [Thread-3 (]: Writing injected SQL for node "model.analytics_warehouse.fct_github_activity"
+[0m20:50:03.703083 [debug] [Thread-3 (]: Began executing node model.analytics_warehouse.fct_github_activity
+[0m20:50:03.717900 [debug] [Thread-3 (]: Writing runtime sql for node "model.analytics_warehouse.fct_github_activity"
+[0m20:50:03.718253 [debug] [Thread-3 (]: Using duckdb connection "model.analytics_warehouse.fct_github_activity"
+[0m20:50:03.718375 [debug] [Thread-3 (]: On model.analytics_warehouse.fct_github_activity: BEGIN
+[0m20:50:03.718482 [debug] [Thread-3 (]: Opening a new connection, currently in state init
+[0m20:50:03.718704 [debug] [Thread-3 (]: SQL status: OK in 0.000 seconds
+[0m20:50:03.718811 [debug] [Thread-3 (]: Using duckdb connection "model.analytics_warehouse.fct_github_activity"
+[0m20:50:03.718925 [debug] [Thread-3 (]: On model.analytics_warehouse.fct_github_activity: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "analytics_warehouse", "target_name": "dev", "node_id": "model.analytics_warehouse.fct_github_activity"} */
+
+    
+
+    create  table
+      "analytics_lakehouse"."main"."fct_github_activity__dbt_tmp"
+  
+    
+    as (
+      WITH staging AS (
+    SELECT * FROM "analytics_lakehouse"."main"."stg_github_events"
+)
+
+SELECT
+    event_date,
+    event_type,
+    COUNT(DISTINCT actor_username) AS unique_contributors,
+    COUNT(event_id) AS total_event_count
+FROM staging
+GROUP BY 1, 2
+ORDER BY total_event_count DESC
+    );
+    
+  
+[0m20:50:03.721332 [debug] [Thread-3 (]: SQL status: OK in 0.002 seconds
+[0m20:50:03.722187 [debug] [Thread-3 (]: Using duckdb connection "model.analytics_warehouse.fct_github_activity"
+[0m20:50:03.722302 [debug] [Thread-3 (]: On model.analytics_warehouse.fct_github_activity: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "analytics_warehouse", "target_name": "dev", "node_id": "model.analytics_warehouse.fct_github_activity"} */
+alter table "analytics_lakehouse"."main"."fct_github_activity__dbt_tmp" rename to "fct_github_activity"
+[0m20:50:03.722512 [debug] [Thread-3 (]: SQL status: OK in 0.000 seconds
+[0m20:50:03.724301 [debug] [Thread-3 (]: On model.analytics_warehouse.fct_github_activity: COMMIT
+[0m20:50:03.724418 [debug] [Thread-3 (]: Using duckdb connection "model.analytics_warehouse.fct_github_activity"
+[0m20:50:03.724518 [debug] [Thread-3 (]: On model.analytics_warehouse.fct_github_activity: COMMIT
+[0m20:50:03.724800 [debug] [Thread-3 (]: SQL status: OK in 0.000 seconds
+[0m20:50:03.725367 [debug] [Thread-3 (]: Using duckdb connection "model.analytics_warehouse.fct_github_activity"
+[0m20:50:03.725474 [debug] [Thread-3 (]: On model.analytics_warehouse.fct_github_activity: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "analytics_warehouse", "target_name": "dev", "node_id": "model.analytics_warehouse.fct_github_activity"} */
+
+      drop table if exists "analytics_lakehouse"."main"."fct_github_activity__dbt_backup" cascade
+    
+[0m20:50:03.725640 [debug] [Thread-3 (]: SQL status: OK in 0.000 seconds
+[0m20:50:03.726073 [debug] [Thread-3 (]: On model.analytics_warehouse.fct_github_activity: Close
+[0m20:50:03.726270 [debug] [Thread-3 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'b415e106-69dd-49f9-beab-5c64c2aa0d15', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10f1e1cd0>]}
+[0m20:50:03.726475 [info ] [Thread-3 (]: 2 of 2 OK created sql table model main.fct_github_activity ..................... [[32mOK[0m in 0.02s]
+[0m20:50:03.726676 [debug] [Thread-3 (]: Finished running node model.analytics_warehouse.fct_github_activity
+[0m20:50:03.727183 [debug] [MainThread]: Using duckdb connection "master"
+[0m20:50:03.727294 [debug] [MainThread]: On master: BEGIN
+[0m20:50:03.727382 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m20:50:03.727528 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m20:50:03.727617 [debug] [MainThread]: On master: COMMIT
+[0m20:50:03.727703 [debug] [MainThread]: Using duckdb connection "master"
+[0m20:50:03.727793 [debug] [MainThread]: On master: COMMIT
+[0m20:50:03.727936 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m20:50:03.728087 [debug] [MainThread]: On master: Close
+[0m20:50:03.728240 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m20:50:03.728332 [debug] [MainThread]: Connection 'model.analytics_warehouse.stg_github_events' was properly closed.
+[0m20:50:03.728409 [debug] [MainThread]: Connection 'model.analytics_warehouse.fct_github_activity' was properly closed.
+[0m20:50:03.728507 [info ] [MainThread]: 
+[0m20:50:03.728619 [info ] [MainThread]: Finished running 1 table model, 1 view model in 0 hours 0 minutes and 0.11 seconds (0.11s).
+[0m20:50:03.728911 [debug] [MainThread]: Command end result
+[0m20:50:03.742249 [debug] [MainThread]: Wrote artifact WritableManifest to ./target/manifest.json
+[0m20:50:03.743503 [debug] [MainThread]: Wrote artifact SemanticManifest to ./target/semantic_manifest.json
+[0m20:50:03.744651 [debug] [MainThread]: Wrote artifact OsiDocument to ./target/osi_document.json
+[0m20:50:03.747376 [debug] [MainThread]: Wrote artifact RunExecutionResult to ./target/run_results.json
+[0m20:50:03.747490 [info ] [MainThread]: 
+[0m20:50:03.747631 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m20:50:03.747731 [info ] [MainThread]: 
+[0m20:50:03.747847 [info ] [MainThread]: Done. PASS=2 WARN=0 ERROR=0 SKIP=0 NO-OP=0 REUSED=0 TOTAL=2
+[0m20:50:03.904403 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": true, "command_wall_clock_time": 1.9536577, "process_in_blocks": "0", "process_kernel_time": 0.418699, "process_mem_max_rss": "215252992", "process_out_blocks": "0", "process_user_time": 2.730885}
+[0m20:50:03.904891 [debug] [MainThread]: Command `dbt run` succeeded at 20:50:03.904795 after 1.95 seconds
+[0m20:50:03.905254 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10df96c00>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10e9591c0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10e54a510>]}
+[0m20:50:03.905608 [debug] [MainThread]: Flushing usage events
+[0m20:50:04.076031 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m20:50:04.927660 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10aeffa40>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10b9d6de0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10b9d65a0>]}
+
+
+============================== 20:50:04.929448 | c39d0159-6b27-4816-9ceb-11a10da7c7b9 ==============================
+[0m20:50:04.929448 [info ] [MainThread]: Running with dbt=1.12.5
+[0m20:50:04.929672 [debug] [MainThread]: running dbt with arguments {'warn_error': 'None', 'empty': 'None', 'indirect_selection': 'eager', 'use_colors': 'True', 'target_path': 'None', 'maximum_seed_size_mib': '1', 'profiles_dir': '/Users/kyreesullivan/.dbt', 'introspect': 'True', 'debug': 'False', 'write_json': 'True', 'use_experimental_parser': 'False', 'partial_parse': 'True', 'hints_enabled': 'True', 'printer_width': '80', 'quiet': 'False', 'log_cache_events': 'False', 'log_format': 'default', 'send_anonymous_usage_stats': 'True', 'invocation_command': 'dbt test --project-dir . --profiles-dir /Users/kyreesullivan/.dbt', 'no_print': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'fail_fast': 'False', 'static_parser': 'True', 'version_check': 'True', 'log_path': 'logs', 'cache_selected_only': 'False'}
+[0m20:50:05.014670 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'c39d0159-6b27-4816-9ceb-11a10da7c7b9', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10bbf3a70>]}
+[0m20:50:05.037887 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'c39d0159-6b27-4816-9ceb-11a10da7c7b9', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10bada7b0>]}
+[0m20:50:05.038912 [info ] [MainThread]: Registered adapter: duckdb=1.11.0
+[0m20:50:05.082196 [debug] [MainThread]: checksum: 7eb63d45f11b42189429e0e90b0539decb8b3768d2c7ec15eddd00df57731bed, vars: {}, profile: analytics_warehouse, target: dev, version: 1.12.5
+[0m20:50:05.131809 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m20:50:05.131975 [debug] [MainThread]: Nothing changed, skipping partial parsing.
+[0m20:50:05.132075 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m20:50:05.136197 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'c39d0159-6b27-4816-9ceb-11a10da7c7b9', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10bcdbdd0>]}
+[0m20:50:05.183351 [debug] [MainThread]: Wrote artifact WritableManifest to ./target/manifest.json
+[0m20:50:05.184696 [debug] [MainThread]: Wrote artifact SemanticManifest to ./target/semantic_manifest.json
+[0m20:50:05.190548 [debug] [MainThread]: Wrote artifact OsiDocument to ./target/osi_document.json
+[0m20:50:05.245676 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'c39d0159-6b27-4816-9ceb-11a10da7c7b9', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c0f5610>]}
+[0m20:50:05.245905 [info ] [MainThread]: Found 2 models, 3 data tests, 500 macros
+[0m20:50:05.246025 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'c39d0159-6b27-4816-9ceb-11a10da7c7b9', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10be13bc0>]}
+[0m20:50:05.246745 [info ] [MainThread]: 
+[0m20:50:05.246867 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m20:50:05.246959 [info ] [MainThread]: 
+[0m20:50:05.247156 [debug] [MainThread]: Acquiring new duckdb connection 'master'
+[0m20:50:05.249082 [debug] [ThreadPool]: Acquiring new duckdb connection 'list_analytics_lakehouse_main'
+[0m20:50:05.293632 [debug] [ThreadPool]: Using duckdb connection "list_analytics_lakehouse_main"
+[0m20:50:05.293828 [debug] [ThreadPool]: On list_analytics_lakehouse_main: BEGIN
+[0m20:50:05.293932 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m20:50:05.298995 [debug] [ThreadPool]: SQL status: OK in 0.005 seconds
+[0m20:50:05.299125 [debug] [ThreadPool]: Using duckdb connection "list_analytics_lakehouse_main"
+[0m20:50:05.299239 [debug] [ThreadPool]: On list_analytics_lakehouse_main: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "analytics_warehouse", "target_name": "dev", "connection_name": "list_analytics_lakehouse_main"} */
+select
+      'analytics_lakehouse' as database,
+      table_name as name,
+      table_schema as schema,
+      CASE table_type
+        WHEN 'BASE TABLE' THEN 'table'
+        WHEN 'VIEW' THEN 'view'
+        WHEN 'LOCAL TEMPORARY' THEN 'table'
+        END as type
+    from system.information_schema.tables
+    where lower(table_schema) = 'main'
+    and lower(table_catalog) = 'analytics_lakehouse'
+  
+[0m20:50:05.300675 [debug] [ThreadPool]: SQL status: OK in 0.001 seconds
+[0m20:50:05.301211 [debug] [ThreadPool]: On list_analytics_lakehouse_main: ROLLBACK
+[0m20:50:05.301357 [debug] [ThreadPool]: On list_analytics_lakehouse_main: Close
+[0m20:50:05.301697 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'c39d0159-6b27-4816-9ceb-11a10da7c7b9', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10bab3770>]}
+[0m20:50:05.301853 [debug] [MainThread]: Using duckdb connection "master"
+[0m20:50:05.301937 [debug] [MainThread]: On master: BEGIN
+[0m20:50:05.302015 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m20:50:05.302153 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m20:50:05.302241 [debug] [MainThread]: On master: COMMIT
+[0m20:50:05.302319 [debug] [MainThread]: Using duckdb connection "master"
+[0m20:50:05.302394 [debug] [MainThread]: On master: COMMIT
+[0m20:50:05.302568 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m20:50:05.302674 [debug] [MainThread]: On master: Close
+[0m20:50:05.303550 [debug] [Thread-1 (]: Began running node test.analytics_warehouse.not_null_fct_github_activity_event_type.36e60b2abd
+[0m20:50:05.303720 [debug] [Thread-2 (]: Began running node test.analytics_warehouse.not_null_stg_github_events_event_id.eba793b6f4
+[0m20:50:05.304080 [debug] [Thread-3 (]: Began running node test.analytics_warehouse.unique_stg_github_events_event_id.a75b93b023
+[0m20:50:05.303855 [info ] [Thread-1 (]: 1 of 3 START test not_null_fct_github_activity_event_type ...................... [RUN]
+[0m20:50:05.304530 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_analytics_lakehouse_main, now test.analytics_warehouse.not_null_fct_github_activity_event_type.36e60b2abd)
+[0m20:50:05.304241 [info ] [Thread-2 (]: 2 of 3 START test not_null_stg_github_events_event_id .......................... [RUN]
+[0m20:50:05.304683 [debug] [Thread-1 (]: Began compiling node test.analytics_warehouse.not_null_fct_github_activity_event_type.36e60b2abd
+[0m20:50:05.304861 [debug] [Thread-2 (]: Acquiring new duckdb connection 'test.analytics_warehouse.not_null_stg_github_events_event_id.eba793b6f4'
+[0m20:50:05.304384 [info ] [Thread-3 (]: 3 of 3 START test unique_stg_github_events_event_id ............................ [RUN]
+[0m20:50:05.311284 [debug] [Thread-2 (]: Began compiling node test.analytics_warehouse.not_null_stg_github_events_event_id.eba793b6f4
+[0m20:50:05.312126 [debug] [Thread-1 (]: Writing injected SQL for node "test.analytics_warehouse.not_null_fct_github_activity_event_type.36e60b2abd"
+[0m20:50:05.312292 [debug] [Thread-3 (]: Acquiring new duckdb connection 'test.analytics_warehouse.unique_stg_github_events_event_id.a75b93b023'
+[0m20:50:05.314602 [debug] [Thread-2 (]: Writing injected SQL for node "test.analytics_warehouse.not_null_stg_github_events_event_id.eba793b6f4"
+[0m20:50:05.314783 [debug] [Thread-3 (]: Began compiling node test.analytics_warehouse.unique_stg_github_events_event_id.a75b93b023
+[0m20:50:05.317903 [debug] [Thread-3 (]: Writing injected SQL for node "test.analytics_warehouse.unique_stg_github_events_event_id.a75b93b023"
+[0m20:50:05.318201 [debug] [Thread-1 (]: Began executing node test.analytics_warehouse.not_null_fct_github_activity_event_type.36e60b2abd
+[0m20:50:05.318326 [debug] [Thread-2 (]: Began executing node test.analytics_warehouse.not_null_stg_github_events_event_id.eba793b6f4
+[0m20:50:05.324775 [debug] [Thread-3 (]: Began executing node test.analytics_warehouse.unique_stg_github_events_event_id.a75b93b023
+[0m20:50:05.324952 [debug] [Thread-1 (]: Writing runtime sql for node "test.analytics_warehouse.not_null_fct_github_activity_event_type.36e60b2abd"
+[0m20:50:05.325564 [debug] [Thread-2 (]: Writing runtime sql for node "test.analytics_warehouse.not_null_stg_github_events_event_id.eba793b6f4"
+[0m20:50:05.326148 [debug] [Thread-3 (]: Writing runtime sql for node "test.analytics_warehouse.unique_stg_github_events_event_id.a75b93b023"
+[0m20:50:05.326474 [debug] [Thread-2 (]: Using duckdb connection "test.analytics_warehouse.not_null_stg_github_events_event_id.eba793b6f4"
+[0m20:50:05.326631 [debug] [Thread-1 (]: Using duckdb connection "test.analytics_warehouse.not_null_fct_github_activity_event_type.36e60b2abd"
+[0m20:50:05.326743 [debug] [Thread-2 (]: On test.analytics_warehouse.not_null_stg_github_events_event_id.eba793b6f4: BEGIN
+[0m20:50:05.326855 [debug] [Thread-3 (]: Using duckdb connection "test.analytics_warehouse.unique_stg_github_events_event_id.a75b93b023"
+[0m20:50:05.326967 [debug] [Thread-1 (]: On test.analytics_warehouse.not_null_fct_github_activity_event_type.36e60b2abd: BEGIN
+[0m20:50:05.327069 [debug] [Thread-2 (]: Opening a new connection, currently in state init
+[0m20:50:05.327168 [debug] [Thread-3 (]: On test.analytics_warehouse.unique_stg_github_events_event_id.a75b93b023: BEGIN
+[0m20:50:05.327264 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m20:50:05.327435 [debug] [Thread-3 (]: Opening a new connection, currently in state init
+[0m20:50:05.327614 [debug] [Thread-2 (]: SQL status: OK in 0.001 seconds
+[0m20:50:05.327792 [debug] [Thread-1 (]: SQL status: OK in 0.001 seconds
+[0m20:50:05.327909 [debug] [Thread-2 (]: Using duckdb connection "test.analytics_warehouse.not_null_stg_github_events_event_id.eba793b6f4"
+[0m20:50:05.328025 [debug] [Thread-3 (]: SQL status: OK in 0.001 seconds
+[0m20:50:05.328136 [debug] [Thread-1 (]: Using duckdb connection "test.analytics_warehouse.not_null_fct_github_activity_event_type.36e60b2abd"
+[0m20:50:05.328253 [debug] [Thread-2 (]: On test.analytics_warehouse.not_null_stg_github_events_event_id.eba793b6f4: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "analytics_warehouse", "target_name": "dev", "node_id": "test.analytics_warehouse.not_null_stg_github_events_event_id.eba793b6f4"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select event_id
+from "analytics_lakehouse"."main"."stg_github_events"
+where event_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m20:50:05.328363 [debug] [Thread-3 (]: Using duckdb connection "test.analytics_warehouse.unique_stg_github_events_event_id.a75b93b023"
+[0m20:50:05.328474 [debug] [Thread-1 (]: On test.analytics_warehouse.not_null_fct_github_activity_event_type.36e60b2abd: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "analytics_warehouse", "target_name": "dev", "node_id": "test.analytics_warehouse.not_null_fct_github_activity_event_type.36e60b2abd"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select event_type
+from "analytics_lakehouse"."main"."fct_github_activity"
+where event_type is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m20:50:05.328664 [debug] [Thread-3 (]: On test.analytics_warehouse.unique_stg_github_events_event_id.a75b93b023: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "analytics_warehouse", "target_name": "dev", "node_id": "test.analytics_warehouse.unique_stg_github_events_event_id.a75b93b023"} */
+
+    
+    select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+select
+    event_id as unique_field,
+    count(*) as n_records
+
+from "analytics_lakehouse"."main"."stg_github_events"
+where event_id is not null
+group by event_id
+having count(*) > 1
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+[0m20:50:05.329103 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m20:50:05.330969 [debug] [Thread-1 (]: On test.analytics_warehouse.not_null_fct_github_activity_event_type.36e60b2abd: ROLLBACK
+[0m20:50:05.331147 [debug] [Thread-3 (]: SQL status: OK in 0.002 seconds
+[0m20:50:05.331287 [debug] [Thread-2 (]: SQL status: OK in 0.003 seconds
+[0m20:50:05.331432 [debug] [Thread-1 (]: On test.analytics_warehouse.not_null_fct_github_activity_event_type.36e60b2abd: Close
+[0m20:50:05.331898 [debug] [Thread-2 (]: On test.analytics_warehouse.not_null_stg_github_events_event_id.eba793b6f4: ROLLBACK
+[0m20:50:05.332298 [debug] [Thread-3 (]: On test.analytics_warehouse.unique_stg_github_events_event_id.a75b93b023: ROLLBACK
+[0m20:50:05.332515 [info ] [Thread-1 (]: 1 of 3 PASS not_null_fct_github_activity_event_type ............................ [[32mPASS[0m in 0.03s]
+[0m20:50:05.332737 [debug] [Thread-2 (]: On test.analytics_warehouse.not_null_stg_github_events_event_id.eba793b6f4: Close
+[0m20:50:05.332928 [debug] [Thread-1 (]: Finished running node test.analytics_warehouse.not_null_fct_github_activity_event_type.36e60b2abd
+[0m20:50:05.333055 [debug] [Thread-3 (]: On test.analytics_warehouse.unique_stg_github_events_event_id.a75b93b023: Close
+[0m20:50:05.333249 [info ] [Thread-2 (]: 2 of 3 PASS not_null_stg_github_events_event_id ................................ [[32mPASS[0m in 0.03s]
+[0m20:50:05.333686 [debug] [Thread-2 (]: Finished running node test.analytics_warehouse.not_null_stg_github_events_event_id.eba793b6f4
+[0m20:50:05.333513 [info ] [Thread-3 (]: 3 of 3 PASS unique_stg_github_events_event_id .................................. [[32mPASS[0m in 0.02s]
+[0m20:50:05.333928 [debug] [Thread-3 (]: Finished running node test.analytics_warehouse.unique_stg_github_events_event_id.a75b93b023
+[0m20:50:05.334371 [debug] [MainThread]: Using duckdb connection "master"
+[0m20:50:05.334470 [debug] [MainThread]: On master: BEGIN
+[0m20:50:05.334547 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m20:50:05.334692 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m20:50:05.334793 [debug] [MainThread]: On master: COMMIT
+[0m20:50:05.334882 [debug] [MainThread]: Using duckdb connection "master"
+[0m20:50:05.334956 [debug] [MainThread]: On master: COMMIT
+[0m20:50:05.335082 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m20:50:05.335166 [debug] [MainThread]: On master: Close
+[0m20:50:05.335289 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m20:50:05.335367 [debug] [MainThread]: Connection 'test.analytics_warehouse.not_null_fct_github_activity_event_type.36e60b2abd' was properly closed.
+[0m20:50:05.335439 [debug] [MainThread]: Connection 'test.analytics_warehouse.not_null_stg_github_events_event_id.eba793b6f4' was properly closed.
+[0m20:50:05.335512 [debug] [MainThread]: Connection 'test.analytics_warehouse.unique_stg_github_events_event_id.a75b93b023' was properly closed.
+[0m20:50:05.335601 [info ] [MainThread]: 
+[0m20:50:05.335701 [info ] [MainThread]: Finished running 3 data tests in 0 hours 0 minutes and 0.09 seconds (0.09s).
+[0m20:50:05.336005 [debug] [MainThread]: Command end result
+[0m20:50:05.349697 [debug] [MainThread]: Wrote artifact WritableManifest to ./target/manifest.json
+[0m20:50:05.350991 [debug] [MainThread]: Wrote artifact SemanticManifest to ./target/semantic_manifest.json
+[0m20:50:05.352123 [debug] [MainThread]: Wrote artifact OsiDocument to ./target/osi_document.json
+[0m20:50:05.355104 [debug] [MainThread]: Wrote artifact RunExecutionResult to ./target/run_results.json
+[0m20:50:05.355211 [info ] [MainThread]: 
+[0m20:50:05.355338 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m20:50:05.355436 [info ] [MainThread]: 
+[0m20:50:05.355546 [info ] [MainThread]: Done. PASS=3 WARN=0 ERROR=0 SKIP=0 NO-OP=0 REUSED=0 TOTAL=3
+[0m20:50:05.356962 [debug] [MainThread]: Resource report: {"command_name": "test", "command_success": true, "command_wall_clock_time": 0.46707058, "process_in_blocks": "0", "process_kernel_time": 0.12711, "process_mem_max_rss": "202571776", "process_out_blocks": "0", "process_user_time": 0.955821}
+[0m20:50:05.357124 [debug] [MainThread]: Command `dbt test` succeeded at 20:50:05.357093 after 0.47 seconds
+[0m20:50:05.357253 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10b9d6ea0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10b9d6ab0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10b9d6ba0>]}
+[0m20:50:05.357374 [debug] [MainThread]: Flushing usage events
+[0m20:50:05.453619 [debug] [MainThread]: An error was encountered while trying to flush usage events
