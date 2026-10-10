@@ -51,7 +51,6 @@ jobs:
                 threads: 4
           PROFILE
           
-          # Pre-generate sample Parquet dataset for staging model during CI
           python3 03_projects/05_realtime_lakehouse/realtime_lakehouse.py
           
           cd 03_projects/02_elt_duckdb_dbt
