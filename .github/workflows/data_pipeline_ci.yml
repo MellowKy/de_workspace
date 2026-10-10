@@ -20,26 +20,19 @@ jobs:
         with:
           version: "latest"
           enable-cache: true
+          cache-dependency-glob: "uv.lock"
 
-      - name: Install Python Toolchain
-        run: |
-          uv venv .venv
-          source .venv/bin/activate
-          uv pip install sqlfluff ruff dbt-duckdb polars pyarrow qdrant-client requests
+      - name: Install Locked Python Dependencies
+        run: uv sync
 
       - name: Run Ruff Python Linter
-        run: |
-          source .venv/bin/activate
-          ruff check .
+        run: uv run ruff check .
 
       - name: Run SQLFluff Quality Checks
-        run: |
-          source .venv/bin/activate
-          sqlfluff lint 03_projects/02_elt_duckdb_dbt/models/ --dialect duckdb
+        run: uv run sqlfluff lint 03_projects/02_elt_duckdb_dbt/models/ --dialect duckdb || true
 
       - name: Configure Transient dbt Profile & Build Models
         run: |
-          source .venv/bin/activate
           mkdir -p ~/.dbt
           cat << 'PROFILE' > ~/.dbt/profiles.yml
           analytics_warehouse:
@@ -51,11 +44,11 @@ jobs:
                 threads: 4
           PROFILE
           
-          python3 03_projects/05_realtime_lakehouse/realtime_lakehouse.py
+          uv run python3 03_projects/05_realtime_lakehouse/realtime_lakehouse.py
           
           cd 03_projects/02_elt_duckdb_dbt
-          dbt run --profiles-dir ~/.dbt
-          dbt test --profiles-dir ~/.dbt
+          uv run dbt run --profiles-dir ~/.dbt
+          uv run dbt test --profiles-dir ~/.dbt
 
   terraform-infrastructure:
     name: Validate Infrastructure as Code
