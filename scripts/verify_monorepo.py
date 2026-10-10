@@ -38,6 +38,10 @@ def main():
         "Terraform Infrastructure Code",
         "cd 03_projects/03_devops_terraform_cicd && terraform validate",
     )
+    run_step(
+        "AI Vector Catalog Search",
+        "uv run --no-project python3 scripts/ai_catalog_query.py --query 'user activity'",
+    )
 
     print("==================================================")
     print("[SUCCESS] All Monorepo Modules Operational & Validated!")
