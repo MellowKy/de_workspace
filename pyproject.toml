@@ -4,9 +4,11 @@ version = "1.0.0"
 description = "Enterprise Data Engineering & Architecture Monorepo"
 requires-python = ">=3.12"
 dependencies = [
+    "bandit>=1.7.8",
     "dagster>=1.7.0",
     "dagster-duckdb>=0.23.0",
     "dbt-duckdb>=1.8.0",
+    "diagrams>=0.23.0",
     "duckdb>=1.0.0",
     "polars>=1.0.0",
     "pyarrow>=16.0.0",

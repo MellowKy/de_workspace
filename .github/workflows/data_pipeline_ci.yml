@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: read
+
 env:
   DE_WORKSPACE_ROOT: ${{ github.workspace }}
   DATA_LAKE_PATH: "${{ github.workspace }}/.data_scratch/processed/parquet"
@@ -13,8 +16,8 @@ env:
   TF_VAR_aws_region: "us-east-1"
 
 jobs:
-  code-quality-and-warehouse:
-    name: Code Quality & Warehouse Validation
+  code-quality-and-security:
+    name: Code Quality & DevSecOps Validation
     runs-on: ubuntu-latest
 
     steps:
@@ -30,6 +33,9 @@ jobs:
 
       - name: Install Locked Dependencies
         run: uv sync --no-install-project
+
+      - name: Run Bandit SAST Security Audit
+        run: uv run bandit -r 03_projects/ scripts/ -ll -ii
 
       - name: Run Ruff Linter
         run: uv run --no-project ruff check .
@@ -51,7 +57,7 @@ jobs:
             outputs:
               dev:
                 type: duckdb
-                path: "/tmp/analytics_lakehouse.duckdb"
+                path: ".data_scratch/analytics_lakehouse.duckdb"
                 threads: 4
           PROFILE
           
@@ -67,9 +73,9 @@ jobs:
           uv run --no-project dagster asset materialize --select "*" -f repository.py
 
   terraform-infrastructure:
-    name: Validate Infrastructure as Code
+    name: Validate Infrastructure as Code Security
     runs-on: ubuntu-latest
-    needs: code-quality-and-warehouse
+    needs: code-quality-and-security
 
     steps:
       - name: Checkout Source Code

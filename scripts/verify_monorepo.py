@@ -14,20 +14,25 @@ def run_step(name, command):
 
 
 def verify_docs():
-    print("==> [CHECK] Verifying Architecture & Governance Documentation...")
+    print("==> [CHECK] Verifying Enterprise Governance Documentation...")
     required_docs = [
         "01_research/adrs/ADR-001-polars-vs-pyspark-stream-ingestion.md",
         "01_research/adrs/ADR-002-duckdb-dbt-vs-snowflake-warehouse.md",
         "01_research/adrs/ADR-003-dagster-sda-vs-airflow-dag.md",
+        "04_docs/architecture_diagrams/system_architecture.md",
+        "04_docs/architecture_diagrams/epdp_architecture.png",
         "04_docs/data_dictionaries/lakehouse_data_dictionary.md",
+        "04_docs/data_dictionaries/mart_data_dictionary.md",
         "04_docs/runbooks/incident_response_playbook.md",
+        "04_docs/runbooks/disaster_recovery_runbook.md",
         "ARCHITECTURE.md",
+        "README.md",
     ]
     for doc in required_docs:
         if not Path(doc).exists():
-            print(f"[FAIL] Missing Required Documentation Asset: {doc}")
+            print(f"[FAIL] Missing Documentation Asset: {doc}")
             sys.exit(1)
-    print("[OK] Architecture & Governance Documentation Verified.")
+    print("[OK] All Architecture, Dictionary, and Runbook Artifacts Verified.")
 
 
 def main():
@@ -36,6 +41,9 @@ def main():
     print("==================================================")
 
     verify_docs()
+    run_step(
+        "Bandit SAST Security Scan", "uv run bandit -r 03_projects/ scripts/ -ll -ii"
+    )
     run_step("Python & SQL Quality Gates", "uv run --no-project ruff check .")
     run_step(
         "Real-Time Polars Lakehouse",
@@ -63,7 +71,7 @@ def main():
     )
 
     print("==================================================")
-    print("[SUCCESS] All Monorepo Modules & Governance Verified!")
+    print("[SUCCESS] All Monorepo Security & Pipeline Gates Validated!")
 
 
 if __name__ == "__main__":

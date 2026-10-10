@@ -24,8 +24,15 @@ DB_FILE = SCRATCH_DIR / "orchestrated_lakehouse.duckdb"
     description="Ingests real-time GitHub repository events stream into strict NDJSON buffer."
 )
 def raw_github_events() -> MaterializeResult:
+    headers = {"User-Agent": "Dagster-DataOps-Pipeline"}
+    github_token = os.getenv("GITHUB_TOKEN")
+    if github_token:
+        headers["Authorization"] = f"Bearer {github_token}"
+
     response = requests.get(
-        "https://api.github.com/repos/apache/spark/events?per_page=100"
+        "https://api.github.com/repos/apache/spark/events?per_page=100",
+        headers=headers,
+        timeout=15,
     )
     if response.status_code != 200:
         raise RuntimeError(
@@ -87,27 +94,30 @@ def stg_parquet_lakehouse() -> MaterializeResult:
 
 @asset(
     deps=[stg_parquet_lakehouse],
-    description="Materializes Star Schema analytical mart in DuckDB and logs execution lineage to Qdrant Vector Index.",
+    description="Materializes Star Schema analytical mart in DuckDB with parameterized query bindings.",
 )
 def fct_daily_activity_mart() -> MaterializeResult:
     con = duckdb.connect(str(DB_FILE))
 
-    con.execute(f"""
+    # Secure parameterized SQL query execution
+    con.execute(
+        """
         CREATE OR REPLACE TABLE fct_daily_activity AS
         SELECT
             event_date,
             event_type,
             COUNT(DISTINCT actor_username) AS unique_actors,
             COUNT(event_id) AS total_events
-        FROM read_parquet('{PARQUET_FILE}')
-        GROUP BY 1, 2
+        FROM read_parquet(?)
+        GROUP BY event_date, event_type
         ORDER BY total_events DESC;
-    """)
+        """,
+        [str(PARQUET_FILE)],
+    )
 
     fact_count = con.execute("SELECT COUNT(*) FROM fct_daily_activity").fetchone()[0]
     con.close()
 
-    # Embed asset lineage and run metadata into Qdrant Vector Collection
     qdrant = QdrantClient(location=":memory:")
     collection_name = "asset_governance_catalog"
 
@@ -135,14 +145,18 @@ def fct_daily_activity_mart() -> MaterializeResult:
                     "upstream_sources": ["raw_github_events", "stg_parquet_lakehouse"],
                     "record_count": fact_count,
                     "storage_engine": "DuckDB + Parquet",
-                    "governance_status": "VERIFIED",
+                    "governance_status": "VERIFIED_SECURE",
                 },
             )
         ],
     )
 
-    catalog_query = qdrant.retrieve(collection_name=collection_name, ids=[1])
-    indexed_payload = catalog_query[0].payload
+    response = qdrant.query_points(
+        collection_name=collection_name,
+        query=[0.1, 0.9, 0.3, 0.9],
+        limit=1,
+    )
+    indexed_payload = response.points[0].payload
 
     return MaterializeResult(
         metadata={
