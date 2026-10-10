@@ -23,19 +23,13 @@ jobs:
           cache-dependency-glob: "uv.lock"
 
       - name: Install Locked Python Dependencies
-        run: uv sync --no-install-project
+        run: uv sync
 
       - name: Run Ruff Python Linter
         run: uv run ruff check .
 
       - name: Run SQLFluff Quality Checks
         run: uv run sqlfluff lint 03_projects/02_elt_duckdb_dbt/models/ --dialect duckdb || true
-
-      - name: Pre-Generate Data Lake Parquet Files for CI Testing
-        run: |
-          chmod +x 03_projects/01_cli_linux_wrangling/partition_worker.sh
-          chmod +x 03_projects/01_cli_linux_wrangling/run_parallel_stream_lab.sh
-          ./03_projects/01_cli_linux_wrangling/run_parallel_stream_lab.sh
 
       - name: Configure Transient dbt Profile & Build Models
         run: |
@@ -49,6 +43,8 @@ jobs:
                 path: "/tmp/analytics_lakehouse.duckdb"
                 threads: 4
           PROFILE
+          
+          uv run python3 03_projects/05_realtime_lakehouse/realtime_lakehouse.py
           
           cd 03_projects/02_elt_duckdb_dbt
           uv run dbt run --profiles-dir ~/.dbt
