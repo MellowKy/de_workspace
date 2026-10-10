@@ -3,7 +3,7 @@
   create view "analytics_lakehouse"."main"."stg_github_events__dbt_tmp" as (
     WITH raw_data AS (
     SELECT * 
-    FROM read_parquet('/Users/kyreesullivan/de_workspace/.data_scratch/processed/parquet/*.parquet')
+    FROM read_parquet('../../.data_scratch/processed/parquet/*.parquet')
 )
 
 SELECT

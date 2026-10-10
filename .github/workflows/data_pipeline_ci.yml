@@ -6,6 +6,12 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  DE_WORKSPACE_ROOT: ${{ github.workspace }}
+  DATA_LAKE_PATH: "${{ github.workspace }}/.data_scratch/processed/parquet"
+  TF_VAR_environment: "ci"
+  TF_VAR_aws_region: "us-east-1"
+
 jobs:
   code-quality-and-warehouse:
     name: Code Quality & Warehouse Validation
@@ -23,13 +29,16 @@ jobs:
           cache-dependency-glob: "uv.lock"
 
       - name: Install Locked Python Dependencies
-        run: uv sync
+        run: uv sync --no-install-project
 
       - name: Run Ruff Python Linter
         run: uv run ruff check .
 
       - name: Run SQLFluff Quality Checks
         run: uv run sqlfluff lint 03_projects/02_elt_duckdb_dbt/models/ --dialect duckdb || true
+
+      - name: Pre-Generate Data Lake Parquet Files
+        run: uv run python3 03_projects/05_realtime_lakehouse/realtime_lakehouse.py
 
       - name: Configure Transient dbt Profile & Build Models
         run: |
@@ -43,8 +52,6 @@ jobs:
                 path: "/tmp/analytics_lakehouse.duckdb"
                 threads: 4
           PROFILE
-          
-          uv run python3 03_projects/05_realtime_lakehouse/realtime_lakehouse.py
           
           cd 03_projects/02_elt_duckdb_dbt
           uv run dbt run --profiles-dir ~/.dbt
