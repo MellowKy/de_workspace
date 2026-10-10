@@ -18,21 +18,26 @@ def run_realtime_pipeline():
     buffer_file = os.path.join(scratch_raw, "event_stream_buffer.ndjson")
     output_parquet = os.path.join(scratch_proc, "github_events_stream.parquet")
 
-    # Step 1: Ingest payload and serialize strictly compliant NDJSON via json.dumps
-    print("==> Step 1: Ingesting GitHub API event stream...")
+    # Step 1: Wipe existing buffer file if present
+    if os.path.exists(buffer_file):
+        os.remove(buffer_file)
+
+    print("==> Step 1: Ingesting GitHub API stream into strict NDJSON...")
     response = requests.get("https://api.github.com/repos/apache/spark/events?per_page=100")
     if response.status_code != 200:
         print(f"[ERROR] API Request failed with status code {response.status_code}")
         sys.exit(1)
 
     events = response.json()
+    
+    # Write strict RFC 8259 JSON lines using json.dumps()
     with open(buffer_file, "w", encoding="utf-8") as f:
         for event in events:
             f.write(json.dumps(event) + "\n")
 
     print(f"[OK] Buffered {len(events)} strict NDJSON records to {buffer_file}")
 
-    # Step 2: Polars LazyFrame Transformation Engine
+    # Step 2: Polars LazyFrame Streaming Transformation Engine
     print("\n==> Step 2: Executing Polars LazyFrame streaming engine...")
     lazy_stream = (
         pl.scan_ndjson(buffer_file)
@@ -49,7 +54,7 @@ def run_realtime_pipeline():
         ])
     )
 
-    # Sink transformation directly to disk as ZSTD-compressed Parquet
+    # Sink directly to ZSTD Parquet out-of-core
     lazy_stream.sink_parquet(output_parquet, compression="zstd")
     file_size_kb = os.path.getsize(output_parquet) / 1024
     print(f"[OK] Stream sink complete. Generated Parquet: {output_parquet} ({file_size_kb:.2f} KB)")
