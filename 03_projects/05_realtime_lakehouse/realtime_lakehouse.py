@@ -46,7 +46,7 @@ def run_realtime_pipeline():
             print(
                 f"[WARN] API returned status {response.status_code}. Activating synthetic fallback..."
             )
-    except Exception as e:
+    except requests.RequestException as e:
         print(f"[WARN] Network request failed ({e}). Activating synthetic fallback...")
 
     # Fallback synthetic record generator for CI/CD resilience
