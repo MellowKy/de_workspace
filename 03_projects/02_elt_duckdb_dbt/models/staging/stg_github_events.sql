@@ -1,13 +1,16 @@
 WITH raw_data AS (
     SELECT * 
-    FROM read_parquet('{{ env_var("DATA_LAKE_PATH", "../../.data_scratch/processed/parquet") }}/*.parquet')
+    FROM read_parquet(
+        '{{ env_var("DATA_LAKE_PATH", "../../.data_scratch/processed/parquet") }}/*.parquet', 
+        union_by_name=True
+    )
 )
 
 SELECT
     event_id::BIGINT AS event_id,
     event_type::VARCHAR AS event_type,
-    actor_username::VARCHAR AS actor_username,
-    repository_name::VARCHAR AS repository_name,
+    COALESCE(actor_username, actor)::VARCHAR AS actor_username,
+    COALESCE(repository_name, repo)::VARCHAR AS repository_name,
     event_date::DATE AS event_date,
     event_time::VARCHAR AS event_time
 FROM raw_data
