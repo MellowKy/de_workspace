@@ -9,7 +9,6 @@ from dagster import Definitions, MaterializeResult, MetadataValue, asset
 from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, PointStruct, VectorParams
 
-# Dynamic workspace root resolution
 WORKSPACE_ROOT = Path(__file__).resolve().parents[2]
 SCRATCH_DIR = Path(
     os.getenv("DE_SCRATCH_DIR", WORKSPACE_ROOT / ".data_scratch" / "dagster")
@@ -112,12 +111,14 @@ def fct_daily_activity_mart() -> MaterializeResult:
     qdrant = QdrantClient(location=":memory:")
     collection_name = "asset_governance_catalog"
 
-    qdrant.recreate_collection(
+    if qdrant.collection_exists(collection_name):
+        qdrant.delete_collection(collection_name)
+
+    qdrant.create_collection(
         collection_name=collection_name,
         vectors_config=VectorParams(size=4, distance=Distance.COSINE),
     )
 
-    # Synthetic vector embedding representing [record_count, file_size, unique_actors, status_code]
     qdrant.upsert(
         collection_name=collection_name,
         points=[
