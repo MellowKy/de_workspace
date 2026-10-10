@@ -1,6 +1,8 @@
 WITH raw_data AS (
-    SELECT * 
-    FROM read_parquet('{{ env_var("DATA_LAKE_PATH", "../../.data_scratch/processed/parquet") }}/*.parquet')
+    SELECT *
+    FROM read_parquet(
+        '{{ env_var("DATA_LAKE_PATH", "../../.data_scratch/processed/parquet") }}/*.parquet'
+    )
 )
 
 SELECT

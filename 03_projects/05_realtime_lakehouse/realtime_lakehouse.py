@@ -49,7 +49,6 @@ def run_realtime_pipeline():
     except requests.RequestException as e:
         print(f"[WARN] Network request failed ({e}). Activating synthetic fallback...")
 
-    # Fallback synthetic record generator for CI/CD resilience
     if not events:
         now_str = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
         events = [
@@ -67,7 +66,6 @@ def run_realtime_pipeline():
     with open(buffer_file, "w", encoding="utf-8") as f:
         f.writelines(json.dumps(event) + "\n" for event in events)
 
-    # Step 2: Polars LazyFrame Streaming Engine
     print("\n==> Step 2: Executing Polars LazyFrame streaming engine...")
     lazy_stream = (
         pl.scan_ndjson(str(buffer_file))
@@ -94,7 +92,6 @@ def run_realtime_pipeline():
     file_size_kb = os.path.getsize(output_parquet) / 1024
     print(f"[OK] Stream sink complete: {output_parquet} ({file_size_kb:.2f} KB)")
 
-    # Step 3: Out-of-Core DuckDB Query
     print("\n==> Step 3: Querying Parquet Lakehouse via DuckDB...")
     con = duckdb.connect()
     query = f"""
