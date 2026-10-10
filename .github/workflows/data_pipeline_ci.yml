@@ -57,6 +57,11 @@ jobs:
           uv run --no-project dbt run --profiles-dir ~/.dbt
           uv run --no-project dbt test --profiles-dir ~/.dbt
 
+      - name: Execute Dagster Software-Defined Asset Orchestration
+        run: |
+          cd 03_projects/06_dagster_orchestration
+          uv run --no-project dagster asset materialize --select "*" -f repository.py
+
   terraform-infrastructure:
     name: Validate Infrastructure as Code
     runs-on: ubuntu-latest
