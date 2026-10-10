@@ -5,9 +5,7 @@ import sys
 def run_step(name, command):
     print(f"==> [CHECK] Verifying {name}...")
     try:
-        res = subprocess.run(
-            command, shell=True, check=True, capture_output=True, text=True
-        )
+        subprocess.run(command, shell=True, check=True, capture_output=True, text=True)
         print(f"[OK] {name} Passed.")
     except subprocess.CalledProcessError as e:
         print(f"[FAIL] {name} Failed!\nError Output:\n{e.stderr}")
