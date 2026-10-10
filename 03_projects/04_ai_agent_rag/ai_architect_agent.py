@@ -26,16 +26,28 @@ def run_agent_pipeline():
             "id": 1,
             "table_name": "fct_github_activity",
             "description": "Fact table containing daily aggregated contributor activity, unique contributors, and total actions by event type.",
-            "columns": ["event_date", "event_type", "unique_contributors", "total_event_count"],
-            "vector": [0.92, 0.11, 0.34, 0.05]
+            "columns": [
+                "event_date",
+                "event_type",
+                "unique_contributors",
+                "total_event_count",
+            ],
+            "vector": [0.92, 0.11, 0.34, 0.05],
         },
         {
             "id": 2,
             "table_name": "stg_github_events",
             "description": "Staging view containing raw GitHub event logs, actor logins, event timestamps, and repository names.",
-            "columns": ["event_id", "event_type", "actor_username", "repository_name", "event_date", "event_time"],
-            "vector": [0.15, 0.88, 0.21, 0.45]
-        }
+            "columns": [
+                "event_id",
+                "event_type",
+                "actor_username",
+                "repository_name",
+                "event_date",
+                "event_time",
+            ],
+            "vector": [0.15, 0.88, 0.21, 0.45],
+        },
     ]
 
     # 3. Index Schema Metadata into Vector Database
@@ -46,25 +58,25 @@ def run_agent_pipeline():
             payload={
                 "table_name": item["table_name"],
                 "description": item["description"],
-                "columns": item["columns"]
-            }
+                "columns": item["columns"],
+            },
         )
         for item in metadata_catalog
     ]
     client.upsert(collection_name=collection_name, points=points)
-    print(f"[OK] Indexed {len(points)} table schema definitions into Qdrant Vector Store.")
+    print(
+        f"[OK] Indexed {len(points)} table schema definitions into Qdrant Vector Store."
+    )
 
     # 4. User Prompt & Semantic Vector Search via query_points()
     user_prompt = "Find total contributor activity and unique actors per day"
     query_vector = [0.89, 0.15, 0.38, 0.08]
 
     print(f"\n==> User Query: '{user_prompt}'")
-    
+
     # Modern qdrant-client API (1.10+) uses query_points()
     response = client.query_points(
-        collection_name=collection_name,
-        query=query_vector,
-        limit=1
+        collection_name=collection_name, query=query_vector, limit=1
     )
 
     retrieved_table = response.points[0].payload
@@ -79,7 +91,7 @@ def run_agent_pipeline():
         event_date,
         unique_contributors,
         total_event_count
-    FROM {retrieved_table['table_name']}
+    FROM {retrieved_table["table_name"]}
     WHERE event_date >= CURRENT_DATE - INTERVAL '7 days'
     ORDER BY total_event_count DESC;
     """
@@ -88,6 +100,7 @@ def run_agent_pipeline():
     print(generated_sql)
     print("==================================================")
     print("[SUCCESS] RAG Metadata Pipeline Execution Complete.")
+
 
 if __name__ == "__main__":
     run_agent_pipeline()
