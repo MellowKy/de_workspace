@@ -12,6 +12,9 @@ def build_and_query_catalog(search_term: str):
     qdrant = QdrantClient(location=":memory:")
     collection_name = "enterprise_schema_catalog"
 
+    if qdrant.collection_exists(collection_name):
+        qdrant.delete_collection(collection_name)
+
     qdrant.create_collection(
         collection_name=collection_name,
         vectors_config=VectorParams(size=4, distance=Distance.COSINE),
@@ -40,7 +43,12 @@ def build_and_query_catalog(search_term: str):
             "asset_name": "fct_github_activity",
             "type": "dbt_fact_table",
             "description": "Aggregated daily user engagement mart tracking distinct actors and event counts.",
-            "columns": ["event_date", "event_type", "unique_actors", "total_events"],
+            "columns": [
+                "event_date",
+                "event_type",
+                "unique_actors",
+                "total_events",
+            ],
         },
         {
             "id": 3,
@@ -57,16 +65,22 @@ def build_and_query_catalog(search_term: str):
     ]
     qdrant.upsert(collection_name=collection_name, points=points)
 
-    # Query matching vector
+    # Query matching vector representation
     query_vector = (
         [0.15, 0.85, 0.35, 0.85]
-        if "actor" in search_term.lower() or "activity" in search_term.lower()
+        if "actor" in search_term.lower()
+        or "activity" in search_term.lower()
+        or "user" in search_term.lower()
         else [0.9, 0.2, 0.8, 0.1]
     )
 
-    results = qdrant.search(
-        collection_name=collection_name, query_vector=query_vector, limit=2
+    # Execute vector similarity query using query_points (qdrant-client >= 1.10.0)
+    response = qdrant.query_points(
+        collection_name=collection_name,
+        query=query_vector,
+        limit=2,
     )
+    results = response.points
 
     print(f"==> Search Query: '{search_term}'")
     print(f"{'MATCHED ASSET':<22} | {'SCORE':<7} | {'TYPE':<18} | {'COLUMNS'}")
