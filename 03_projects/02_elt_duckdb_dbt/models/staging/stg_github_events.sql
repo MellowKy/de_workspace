@@ -6,8 +6,8 @@ WITH raw_data AS (
 SELECT
     event_id::BIGINT AS event_id,
     event_type::VARCHAR AS event_type,
-    actor::VARCHAR AS actor_username,
-    repo::VARCHAR AS repository_name,
+    actor_username::VARCHAR AS actor_username,
+    repository_name::VARCHAR AS repository_name,
     event_date::DATE AS event_date,
     event_time::VARCHAR AS event_time
 FROM raw_data
