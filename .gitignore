@@ -1,22 +1,25 @@
-# Local Data Scratch Space & Storage Binaries
-.data_scratch/
-*.duckdb
-*.duckdb.wal
-*.parquet
-*.csv
-*.json
-*.arrow
-
-# Environments & State
+# Virtual Environment & Dependencies
 .venv/
-venv/
 __pycache__/
 *.pyc
+
+# Transient Data Lake & Scratch Storage
+.data_scratch/
+*.duckdb
+*.parquet
+*.ndjson
+
+# dbt Build & Log Artifacts
+03_projects/02_elt_duckdb_dbt/logs/
+03_projects/02_elt_duckdb_dbt/target/
+03_projects/02_elt_duckdb_dbt/dbt_packages/
+
+# Terraform Internal Cache
 .terraform/
 *.tfstate
 *.tfstate.backup
 
-# IDE Artifacts
-.vscode/
-.idea/
+# OS & Editor Files
 .DS_Store
+.idea/
+.vscode/
