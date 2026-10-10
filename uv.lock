@@ -414,7 +414,7 @@ wheels = [
 [[package]]
 name = "de-workspace"
 version = "1.0.0"
-source = { editable = "." }
+source = { virtual = "." }
 dependencies = [
     { name = "dbt-duckdb" },
     { name = "duckdb" },

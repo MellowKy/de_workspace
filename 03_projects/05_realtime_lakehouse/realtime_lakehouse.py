@@ -1,9 +1,11 @@
+import json
 import os
 import sys
-import json
-import requests
-import polars as pl
+
 import duckdb
+import polars as pl
+import requests
+
 
 def run_realtime_pipeline():
     print("==================================================")
@@ -27,8 +29,7 @@ def run_realtime_pipeline():
 
     events = response.json()
     with open(buffer_file, "w", encoding="utf-8") as f:
-        for event in events:
-            f.write(json.dumps(event) + "\n")
+        f.writelines(json.dumps(event) + "\n" for event in events)
 
     print(f"[OK] Buffered {len(events)} strict NDJSON records to {buffer_file}")
 

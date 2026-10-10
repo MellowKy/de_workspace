@@ -23,7 +23,7 @@ jobs:
           cache-dependency-glob: "uv.lock"
 
       - name: Install Locked Python Dependencies
-        run: uv sync
+        run: uv sync --no-install-project
 
       - name: Run Ruff Python Linter
         run: uv run ruff check .

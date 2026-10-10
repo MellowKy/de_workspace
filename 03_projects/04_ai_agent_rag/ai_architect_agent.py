@@ -1,6 +1,6 @@
-import json
 from qdrant_client import QdrantClient
-from qdrant_client.models import Distance, VectorParams, PointStruct
+from qdrant_client.models import Distance, PointStruct, VectorParams
+
 
 def run_agent_pipeline():
     print("==================================================")
