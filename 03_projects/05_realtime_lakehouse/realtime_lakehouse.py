@@ -18,10 +18,7 @@ def run_realtime_pipeline():
     buffer_file = os.path.join(scratch_raw, "event_stream_buffer.ndjson")
     output_parquet = os.path.join(scratch_proc, "github_events_stream.parquet")
 
-    # Step 1: Wipe existing buffer file if present
-    if os.path.exists(buffer_file):
-        os.remove(buffer_file)
-
+    # Step 1: Ingest payload and serialize strictly compliant NDJSON
     print("==> Step 1: Ingesting GitHub API stream into strict NDJSON...")
     response = requests.get("https://api.github.com/repos/apache/spark/events?per_page=100")
     if response.status_code != 200:
@@ -29,15 +26,13 @@ def run_realtime_pipeline():
         sys.exit(1)
 
     events = response.json()
-    
-    # Write strict RFC 8259 JSON lines using json.dumps()
     with open(buffer_file, "w", encoding="utf-8") as f:
         for event in events:
             f.write(json.dumps(event) + "\n")
 
     print(f"[OK] Buffered {len(events)} strict NDJSON records to {buffer_file}")
 
-    # Step 2: Polars LazyFrame Streaming Transformation Engine
+    # Step 2: Polars LazyFrame Transformation Engine with UTC Time Zone Specification
     print("\n==> Step 2: Executing Polars LazyFrame streaming engine...")
     lazy_stream = (
         pl.scan_ndjson(buffer_file)
@@ -46,7 +41,7 @@ def run_realtime_pipeline():
             pl.col("type").alias("event_type"),
             pl.col("actor").struct.field("login").alias("actor_username"),
             pl.col("repo").struct.field("name").alias("repository_name"),
-            pl.col("created_at").str.to_datetime().alias("event_timestamp"),
+            pl.col("created_at").str.to_datetime(time_zone="UTC").alias("event_timestamp"),
         ])
         .with_columns([
             pl.col("event_timestamp").dt.date().alias("event_date"),
@@ -54,7 +49,7 @@ def run_realtime_pipeline():
         ])
     )
 
-    # Sink directly to ZSTD Parquet out-of-core
+    # Sink transformation directly to disk as ZSTD-compressed Parquet
     lazy_stream.sink_parquet(output_parquet, compression="zstd")
     file_size_kb = os.path.getsize(output_parquet) / 1024
     print(f"[OK] Stream sink complete. Generated Parquet: {output_parquet} ({file_size_kb:.2f} KB)")
