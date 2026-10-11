@@ -51,13 +51,14 @@ jobs:
       - name: Build & Test dbt Models
         run: |
           mkdir -p ~/.dbt
-          cat << 'PROFILE' > ~/.dbt/profiles.yml
+          mkdir -p ${{ github.workspace }}/.data_scratch
+          cat << PROFILE > ~/.dbt/profiles.yml
           analytics_warehouse:
             target: dev
             outputs:
               dev:
                 type: duckdb
-                path: ".data_scratch/analytics_lakehouse.duckdb"
+                path: "${{ github.workspace }}/.data_scratch/analytics_lakehouse.duckdb"
                 threads: 4
           PROFILE
           
