@@ -11,7 +11,6 @@ DELTA_TABLE_PATH.parent.mkdir(parents=True, exist_ok=True)
 def run_delta_pipeline():
     print("==> [DELTA LAKE] Executing Versioned ACID Transactions...")
 
-    # 1. Create Initial Commit (Version 0) using Polars LazyFrame
     raw_df_v0 = pl.DataFrame({
         "event_id": ["evt_101", "evt_102", "evt_103"],
         "event_type": ["PushEvent", "PullRequestEvent", "WatchEvent"],
@@ -26,13 +25,12 @@ def run_delta_pipeline():
     )
     print("[OK] Delta Table Initialized (Version 0 Committed).")
 
-    # 2. Append Batch with Schema Evolution (Version 1 - adding payload_size column)
     raw_df_v1 = pl.DataFrame({
         "event_id": ["evt_104", "evt_105"],
         "event_type": ["PushEvent", "IssuesEvent"],
         "actor": ["dev_ops", "qa_bot"],
         "repo": ["de_workspace", "de_workspace"],
-        "payload_size_kb": [128.5, 42.0],  # New Column Triggering Schema Evolution
+        "payload_size_kb": [128.5, 42.0],
     })
 
     write_deltalake(
@@ -43,12 +41,12 @@ def run_delta_pipeline():
     )
     print("[OK] Delta Table Appended with Schema Evolution (Version 1 Committed).")
 
-    # 3. Time-Travel Querying via DuckDB
     con = duckdb.connect()
     con.execute("INSTALL delta; LOAD delta;")
 
     print("\n--- DuckDB Query: Current State (Version 1) ---")
-    v1_results = con.execute(f"SELECT event_id, event_type, actor, payload_size_kb FROM delta_scan('{DELTA_TABLE_PATH}')").fetchall()
+    query = "SELECT event_id, event_type, actor, payload_size_kb FROM delta_scan(?)"
+    v1_results = con.execute(query, [str(DELTA_TABLE_PATH)]).fetchall()
     for row in v1_results:
         print(row)
 
