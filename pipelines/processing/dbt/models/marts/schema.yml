@@ -1,0 +1,10 @@
+version: 2
+models:
+  - name: fct_daily_sales
+    columns:
+      - name: sales_date
+        tests:
+          - not_null
+      - name: total_revenue
+        tests:
+          - not_null

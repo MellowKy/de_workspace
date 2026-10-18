@@ -1,0 +1,8 @@
+de_workspace:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: '/Users/kyreesullivan/de_workspace/data/silver/workspace.duckdb'
+      extensions:
+        - delta

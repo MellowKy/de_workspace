@@ -1,0 +1,4 @@
+checks for fct_daily_sales:
+  - row_count > 0
+  - missing_count(sales_date) = 0
+  - min(total_revenue) > 0

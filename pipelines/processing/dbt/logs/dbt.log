@@ -1,0 +1,1131 @@
+[0m21:35:00.819494 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1088a2540>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10bb87b30>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10bb878f0>]}
+
+
+============================== 21:35:00.822007 | 2f6e05fd-bd61-42aa-8bf5-4414ae93935d ==============================
+[0m21:35:00.822007 [info ] [MainThread]: Running with dbt=1.12.5
+[0m21:35:00.822236 [debug] [MainThread]: running dbt with arguments {'hints_enabled': 'True', 'write_json': 'True', 'use_colors': 'True', 'profiles_dir': '/Users/kyreesullivan/de_workspace/pipelines/processing/dbt', 'indirect_selection': 'eager', 'printer_width': '80', 'empty': 'False', 'use_experimental_parser': 'False', 'log_format': 'default', 'introspect': 'True', 'log_cache_events': 'False', 'debug': 'False', 'maximum_seed_size_mib': '1', 'fail_fast': 'False', 'target_path': 'None', 'version_check': 'True', 'no_print': 'None', 'static_parser': 'True', 'quiet': 'False', 'invocation_command': 'dbt run --select stg_orders --profiles-dir /Users/kyreesullivan/de_workspace/pipelines/processing/dbt', 'warn_error': 'None', 'send_anonymous_usage_stats': 'True', 'partial_parse': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'log_path': '/Users/kyreesullivan/de_workspace/pipelines/processing/dbt/logs', 'cache_selected_only': 'False'}
+[0m21:35:00.922431 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '2f6e05fd-bd61-42aa-8bf5-4414ae93935d', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10b131f40>]}
+[0m21:35:00.945482 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '2f6e05fd-bd61-42aa-8bf5-4414ae93935d', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10a40c8f0>]}
+[0m21:35:00.946773 [info ] [MainThread]: Registered adapter: duckdb=1.11.0
+[0m21:35:01.001752 [debug] [MainThread]: checksum: 8aa2bf27f5dbbd8f3613a18ee0fca90edfb16aeb096be0b0d80f9cc9d4a73669, vars: {}, profile: de_workspace, target: dev, version: 1.12.5
+[0m21:35:01.002104 [info ] [MainThread]: Unable to do partial parsing because saved manifest not found. Starting full parse.
+[0m21:35:01.002236 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': '2f6e05fd-bd61-42aa-8bf5-4414ae93935d', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10bdd2150>]}
+[0m21:35:01.564823 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '2f6e05fd-bd61-42aa-8bf5-4414ae93935d', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c4fb260>]}
+[0m21:35:01.601989 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/kyreesullivan/de_workspace/pipelines/processing/dbt/target/manifest.json
+[0m21:35:01.604340 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/kyreesullivan/de_workspace/pipelines/processing/dbt/target/semantic_manifest.json
+[0m21:35:01.614238 [debug] [MainThread]: Wrote artifact OsiDocument to /Users/kyreesullivan/de_workspace/pipelines/processing/dbt/target/osi_document.json
+[0m21:35:01.619557 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '2f6e05fd-bd61-42aa-8bf5-4414ae93935d', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c59ede0>]}
+[0m21:35:01.619725 [info ] [MainThread]: Found 2 models, 5 data tests, 500 macros
+[0m21:35:01.619837 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '2f6e05fd-bd61-42aa-8bf5-4414ae93935d', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c60d2e0>]}
+[0m21:35:01.620394 [info ] [MainThread]: 
+[0m21:35:01.620507 [info ] [MainThread]: Concurrency: 1 threads (target='dev')
+[0m21:35:01.620600 [info ] [MainThread]: 
+[0m21:35:01.620769 [debug] [MainThread]: Acquiring new duckdb connection 'master'
+[0m21:35:01.621086 [debug] [ThreadPool]: Acquiring new duckdb connection 'list_workspace'
+[0m21:35:01.650404 [debug] [ThreadPool]: Using duckdb connection "list_workspace"
+[0m21:35:01.650536 [debug] [ThreadPool]: On list_workspace: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "de_workspace", "target_name": "dev", "connection_name": "list_workspace"} */
+
+    
+    select schema_name
+    from system.information_schema.schemata
+    
+    where lower(catalog_name) = '"workspace"'
+    
+  
+  
+[0m21:35:01.650628 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m21:35:01.655712 [debug] [ThreadPool]: DuckDB adapter: duckdb error: IO Error: Cannot open file "/Users/kyreesullivan/de_workspace/pipelines/processing/dbt/data/silver/workspace.duckdb": No such file or directory
+[0m21:35:01.655844 [debug] [ThreadPool]: DuckDB adapter: Error running SQL: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "de_workspace", "target_name": "dev", "connection_name": "list_workspace"} */
+
+    
+    select schema_name
+    from system.information_schema.schemata
+    
+    where lower(catalog_name) = '"workspace"'
+    
+  
+  
+[0m21:35:01.655942 [debug] [ThreadPool]: DuckDB adapter: Rolling back transaction.
+[0m21:35:01.656027 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m21:35:01.657711 [debug] [ThreadPool]: DuckDB adapter: duckdb error: IO Error: Cannot open file "/Users/kyreesullivan/de_workspace/pipelines/processing/dbt/data/silver/workspace.duckdb": No such file or directory
+[0m21:35:01.657810 [debug] [ThreadPool]: DuckDB adapter: Error running SQL: macro list_schemas
+[0m21:35:01.657893 [debug] [ThreadPool]: DuckDB adapter: Rolling back transaction.
+[0m21:35:01.657969 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m21:35:01.659646 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m21:35:01.659737 [debug] [MainThread]: Connection 'list_workspace' was properly closed.
+[0m21:35:01.659826 [info ] [MainThread]: 
+[0m21:35:01.659929 [info ] [MainThread]: Finished running  in 0 hours 0 minutes and 0.04 seconds (0.04s).
+[0m21:35:01.660088 [error] [MainThread]: [[31mERROR[0m]: Encountered an error:
+IO Error: Cannot open file "/Users/kyreesullivan/de_workspace/pipelines/processing/dbt/data/silver/workspace.duckdb": No such file or directory
+[0m21:35:01.667295 [error] [MainThread]: Traceback (most recent call last):
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/duckdb/connections.py", line 110, in exception_handler
+    yield
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/sql/connections.py", line 147, in add_query
+    cursor = connection.handle.cursor()
+             ^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/contracts/connection.py", line 96, in handle
+    self._handle.resolve(self)
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/contracts/connection.py", line 120, in resolve
+    return self.opener(connection)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/duckdb/connections.py", line 68, in open
+    connection.handle = cls._ENV.handle()
+                        ^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/duckdb/environments/local.py", line 79, in handle
+    self.conn = self.initialize_db(self.creds, self._plugins)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/duckdb/environments/__init__.py", line 164, in initialize_db
+    conn = duckdb.connect(creds.path, read_only=False, config=config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_duckdb.IOException: IO Error: Cannot open file "/Users/kyreesullivan/de_workspace/pipelines/processing/dbt/data/silver/workspace.duckdb": No such file or directory
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/duckdb/connections.py", line 110, in exception_handler
+    yield
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/base/impl.py", line 1372, in execute_macro
+    result = macro_function(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt_common/clients/jinja.py", line 427, in __call__
+    return self.call_macro(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt_common/clients/jinja.py", line 395, in call_macro
+    return macro(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/runtime.py", line 770, in __call__
+    return self._invoke(arguments, autoescape)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/runtime.py", line 784, in _invoke
+    rv = self._func(*arguments)
+         ^^^^^^^^^^^^^^^^^^^^^^
+  File "<template>", line 20, in macro
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/sandbox.py", line 401, in call
+    return __context.call(__obj, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/runtime.py", line 303, in call
+    return __obj(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/clients/jinja.py", line 151, in __call__
+    return self.call_macro(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt_common/clients/jinja.py", line 395, in call_macro
+    return macro(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/runtime.py", line 770, in __call__
+    return self._invoke(arguments, autoescape)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/runtime.py", line 784, in _invoke
+    rv = self._func(*arguments)
+         ^^^^^^^^^^^^^^^^^^^^^^
+  File "<template>", line 50, in macro
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/sandbox.py", line 401, in call
+    return __context.call(__obj, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/runtime.py", line 303, in call
+    return __obj(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/clients/jinja.py", line 151, in __call__
+    return self.call_macro(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt_common/clients/jinja.py", line 395, in call_macro
+    return macro(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/runtime.py", line 770, in __call__
+    return self._invoke(arguments, autoescape)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/runtime.py", line 784, in _invoke
+    rv = self._func(*arguments)
+         ^^^^^^^^^^^^^^^^^^^^^^
+  File "<template>", line 33, in macro
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/sandbox.py", line 401, in call
+    return __context.call(__obj, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/runtime.py", line 303, in call
+    return __obj(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/clients/jinja.py", line 151, in __call__
+    return self.call_macro(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt_common/clients/jinja.py", line 395, in call_macro
+    return macro(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/runtime.py", line 770, in __call__
+    return self._invoke(arguments, autoescape)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/runtime.py", line 784, in _invoke
+    rv = self._func(*arguments)
+         ^^^^^^^^^^^^^^^^^^^^^^
+  File "<template>", line 52, in macro
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/sandbox.py", line 401, in call
+    return __context.call(__obj, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/runtime.py", line 303, in call
+    return __obj(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt_common/record.py", line 538, in record_replay_wrapper
+    return func_to_record(*call_args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/base/impl.py", line 523, in execute
+    return self.connections.execute(sql=sql, auto_begin=auto_begin, fetch=fetch, limit=limit)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/duckdb/connections.py", line 145, in execute
+    return super().execute(sql, auto_begin, fetch, limit)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/sql/connections.py", line 219, in execute
+    _, cursor = self.add_query(sql, auto_begin)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/sql/connections.py", line 131, in add_query
+    with self.exception_handler(sql):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.15/Frameworks/Python.framework/Versions/3.12/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/duckdb/connections.py", line 117, in exception_handler
+    self.rollback_if_open()
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/base/connections.py", line 125, in rollback_if_open
+    if conn is not None and conn.handle and conn.transaction_open:
+                            ^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/contracts/connection.py", line 96, in handle
+    self._handle.resolve(self)
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/contracts/connection.py", line 120, in resolve
+    return self.opener(connection)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/duckdb/connections.py", line 68, in open
+    connection.handle = cls._ENV.handle()
+                        ^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/duckdb/environments/local.py", line 79, in handle
+    self.conn = self.initialize_db(self.creds, self._plugins)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/duckdb/environments/__init__.py", line 164, in initialize_db
+    conn = duckdb.connect(creds.path, read_only=False, config=config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_duckdb.IOException: IO Error: Cannot open file "/Users/kyreesullivan/de_workspace/pipelines/processing/dbt/data/silver/workspace.duckdb": No such file or directory
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/cli/requires.py", line 198, in wrapper
+    result, success = func(*args, **kwargs)
+                      ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/cli/requires.py", line 144, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/cli/requires.py", line 295, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/cli/requires.py", line 340, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/cli/requires.py", line 387, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/cli/requires.py", line 404, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/cli/main.py", line 609, in run
+    results = task.run()
+              ^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/task/runnable.py", line 775, in run
+    result = self.execute_with_hooks(selected_uids)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/task/runnable.py", line 701, in execute_with_hooks
+    before_run_status = self.before_run(adapter, selected_uids)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/task/run.py", line 1313, in before_run
+    self.create_schemas(adapter, required_schemas)
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/task/runnable.py", line 883, in create_schemas
+    existing_schemas_lowered.update(ls_future.result())
+                                    ^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.15/Frameworks/Python.framework/Versions/3.12/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.15/Frameworks/Python.framework/Versions/3.12/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/opt/homebrew/Cellar/python@3.12/3.12.15/Frameworks/Python.framework/Versions/3.12/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt_common/utils/executor.py", line 20, in connected
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/task/runnable.py", line 858, in list_schemas
+    for s in adapter.list_schemas(database_quoted)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/sql/impl.py", line 219, in list_schemas
+    results = self.execute_macro(LIST_SCHEMAS_MACRO_NAME, kwargs={"database": database})
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/base/impl.py", line 1371, in execute_macro
+    with self.connections.exception_handler(f"macro {macro_name}"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.15/Frameworks/Python.framework/Versions/3.12/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/duckdb/connections.py", line 117, in exception_handler
+    self.rollback_if_open()
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/base/connections.py", line 125, in rollback_if_open
+    if conn is not None and conn.handle and conn.transaction_open:
+                            ^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/contracts/connection.py", line 96, in handle
+    self._handle.resolve(self)
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/contracts/connection.py", line 120, in resolve
+    return self.opener(connection)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/duckdb/connections.py", line 68, in open
+    connection.handle = cls._ENV.handle()
+                        ^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/duckdb/environments/local.py", line 79, in handle
+    self.conn = self.initialize_db(self.creds, self._plugins)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/duckdb/environments/__init__.py", line 164, in initialize_db
+    conn = duckdb.connect(creds.path, read_only=False, config=config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_duckdb.IOException: IO Error: Cannot open file "/Users/kyreesullivan/de_workspace/pipelines/processing/dbt/data/silver/workspace.duckdb": No such file or directory
+
+[0m21:35:01.674530 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": false, "command_wall_clock_time": 0.8923114, "process_in_blocks": "0", "process_kernel_time": 0.164396, "process_mem_max_rss": "164757504", "process_out_blocks": "0", "process_user_time": 1.298249}
+[0m21:35:01.674699 [debug] [MainThread]: Command `dbt run` failed at 21:35:01.674666 after 0.89 seconds
+[0m21:35:01.674828 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10b0f8500>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c351430>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c595070>]}
+[0m21:35:01.674950 [debug] [MainThread]: Flushing usage events
+[0m21:35:01.862991 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m21:35:03.737371 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x109ebfc80>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10a123ce0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10a123aa0>]}
+
+
+============================== 21:35:03.739287 | cd8fcf75-9fed-4750-8ca3-382a200bf658 ==============================
+[0m21:35:03.739287 [info ] [MainThread]: Running with dbt=1.12.5
+[0m21:35:03.739517 [debug] [MainThread]: running dbt with arguments {'use_experimental_parser': 'False', 'profiles_dir': '/Users/kyreesullivan/de_workspace/pipelines/processing/dbt', 'printer_width': '80', 'quiet': 'False', 'log_format': 'default', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'debug': 'False', 'introspect': 'True', 'fail_fast': 'False', 'cache_selected_only': 'False', 'target_path': 'None', 'send_anonymous_usage_stats': 'True', 'static_parser': 'True', 'use_colors': 'True', 'indirect_selection': 'eager', 'hints_enabled': 'True', 'log_cache_events': 'False', 'maximum_seed_size_mib': '1', 'log_path': '/Users/kyreesullivan/de_workspace/pipelines/processing/dbt/logs', 'warn_error': 'None', 'version_check': 'True', 'empty': 'False', 'invocation_command': 'dbt run --select stg_orders --profiles-dir /Users/kyreesullivan/de_workspace/pipelines/processing/dbt', 'no_print': 'None', 'partial_parse': 'True', 'write_json': 'True'}
+[0m21:35:03.826809 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'cd8fcf75-9fed-4750-8ca3-382a200bf658', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1089abda0>]}
+[0m21:35:03.850673 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'cd8fcf75-9fed-4750-8ca3-382a200bf658', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10a314e60>]}
+[0m21:35:03.851598 [info ] [MainThread]: Registered adapter: duckdb=1.11.0
+[0m21:35:03.897908 [debug] [MainThread]: checksum: 8aa2bf27f5dbbd8f3613a18ee0fca90edfb16aeb096be0b0d80f9cc9d4a73669, vars: {}, profile: de_workspace, target: dev, version: 1.12.5
+[0m21:35:03.949695 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m21:35:03.949872 [debug] [MainThread]: Nothing changed, skipping partial parsing.
+[0m21:35:03.949975 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m21:35:03.954124 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'cd8fcf75-9fed-4750-8ca3-382a200bf658', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10a3d2ab0>]}
+[0m21:35:04.002801 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/kyreesullivan/de_workspace/pipelines/processing/dbt/target/manifest.json
+[0m21:35:04.004157 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/kyreesullivan/de_workspace/pipelines/processing/dbt/target/semantic_manifest.json
+[0m21:35:04.010115 [debug] [MainThread]: Wrote artifact OsiDocument to /Users/kyreesullivan/de_workspace/pipelines/processing/dbt/target/osi_document.json
+[0m21:35:04.013592 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'cd8fcf75-9fed-4750-8ca3-382a200bf658', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10a672990>]}
+[0m21:35:04.013765 [info ] [MainThread]: Found 2 models, 5 data tests, 500 macros
+[0m21:35:04.013884 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'cd8fcf75-9fed-4750-8ca3-382a200bf658', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10a835c40>]}
+[0m21:35:04.014477 [info ] [MainThread]: 
+[0m21:35:04.014597 [info ] [MainThread]: Concurrency: 1 threads (target='dev')
+[0m21:35:04.014688 [info ] [MainThread]: 
+[0m21:35:04.014881 [debug] [MainThread]: Acquiring new duckdb connection 'master'
+[0m21:35:04.015288 [debug] [ThreadPool]: Acquiring new duckdb connection 'list_workspace'
+[0m21:35:04.060046 [debug] [ThreadPool]: Using duckdb connection "list_workspace"
+[0m21:35:04.060233 [debug] [ThreadPool]: On list_workspace: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "de_workspace", "target_name": "dev", "connection_name": "list_workspace"} */
+
+    
+    select schema_name
+    from system.information_schema.schemata
+    
+    where lower(catalog_name) = '"workspace"'
+    
+  
+  
+[0m21:35:04.060340 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m21:35:04.062755 [debug] [ThreadPool]: DuckDB adapter: duckdb error: IO Error: Cannot open file "/Users/kyreesullivan/de_workspace/pipelines/processing/dbt/data/silver/workspace.duckdb": No such file or directory
+[0m21:35:04.062876 [debug] [ThreadPool]: DuckDB adapter: Error running SQL: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "de_workspace", "target_name": "dev", "connection_name": "list_workspace"} */
+
+    
+    select schema_name
+    from system.information_schema.schemata
+    
+    where lower(catalog_name) = '"workspace"'
+    
+  
+  
+[0m21:35:04.062967 [debug] [ThreadPool]: DuckDB adapter: Rolling back transaction.
+[0m21:35:04.063047 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m21:35:04.064664 [debug] [ThreadPool]: DuckDB adapter: duckdb error: IO Error: Cannot open file "/Users/kyreesullivan/de_workspace/pipelines/processing/dbt/data/silver/workspace.duckdb": No such file or directory
+[0m21:35:04.064762 [debug] [ThreadPool]: DuckDB adapter: Error running SQL: macro list_schemas
+[0m21:35:04.064846 [debug] [ThreadPool]: DuckDB adapter: Rolling back transaction.
+[0m21:35:04.064925 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m21:35:04.066714 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m21:35:04.066842 [debug] [MainThread]: Connection 'list_workspace' was properly closed.
+[0m21:35:04.066945 [info ] [MainThread]: 
+[0m21:35:04.067055 [info ] [MainThread]: Finished running  in 0 hours 0 minutes and 0.05 seconds (0.05s).
+[0m21:35:04.067216 [error] [MainThread]: [[31mERROR[0m]: Encountered an error:
+IO Error: Cannot open file "/Users/kyreesullivan/de_workspace/pipelines/processing/dbt/data/silver/workspace.duckdb": No such file or directory
+[0m21:35:04.070045 [error] [MainThread]: Traceback (most recent call last):
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/duckdb/connections.py", line 110, in exception_handler
+    yield
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/sql/connections.py", line 147, in add_query
+    cursor = connection.handle.cursor()
+             ^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/contracts/connection.py", line 96, in handle
+    self._handle.resolve(self)
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/contracts/connection.py", line 120, in resolve
+    return self.opener(connection)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/duckdb/connections.py", line 68, in open
+    connection.handle = cls._ENV.handle()
+                        ^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/duckdb/environments/local.py", line 79, in handle
+    self.conn = self.initialize_db(self.creds, self._plugins)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/duckdb/environments/__init__.py", line 164, in initialize_db
+    conn = duckdb.connect(creds.path, read_only=False, config=config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_duckdb.IOException: IO Error: Cannot open file "/Users/kyreesullivan/de_workspace/pipelines/processing/dbt/data/silver/workspace.duckdb": No such file or directory
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/duckdb/connections.py", line 110, in exception_handler
+    yield
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/base/impl.py", line 1372, in execute_macro
+    result = macro_function(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt_common/clients/jinja.py", line 427, in __call__
+    return self.call_macro(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt_common/clients/jinja.py", line 395, in call_macro
+    return macro(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/runtime.py", line 770, in __call__
+    return self._invoke(arguments, autoescape)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/runtime.py", line 784, in _invoke
+    rv = self._func(*arguments)
+         ^^^^^^^^^^^^^^^^^^^^^^
+  File "<template>", line 20, in macro
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/sandbox.py", line 401, in call
+    return __context.call(__obj, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/runtime.py", line 303, in call
+    return __obj(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/clients/jinja.py", line 151, in __call__
+    return self.call_macro(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt_common/clients/jinja.py", line 395, in call_macro
+    return macro(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/runtime.py", line 770, in __call__
+    return self._invoke(arguments, autoescape)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/runtime.py", line 784, in _invoke
+    rv = self._func(*arguments)
+         ^^^^^^^^^^^^^^^^^^^^^^
+  File "<template>", line 50, in macro
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/sandbox.py", line 401, in call
+    return __context.call(__obj, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/runtime.py", line 303, in call
+    return __obj(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/clients/jinja.py", line 151, in __call__
+    return self.call_macro(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt_common/clients/jinja.py", line 395, in call_macro
+    return macro(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/runtime.py", line 770, in __call__
+    return self._invoke(arguments, autoescape)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/runtime.py", line 784, in _invoke
+    rv = self._func(*arguments)
+         ^^^^^^^^^^^^^^^^^^^^^^
+  File "<template>", line 33, in macro
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/sandbox.py", line 401, in call
+    return __context.call(__obj, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/runtime.py", line 303, in call
+    return __obj(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/clients/jinja.py", line 151, in __call__
+    return self.call_macro(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt_common/clients/jinja.py", line 395, in call_macro
+    return macro(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/runtime.py", line 770, in __call__
+    return self._invoke(arguments, autoescape)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/runtime.py", line 784, in _invoke
+    rv = self._func(*arguments)
+         ^^^^^^^^^^^^^^^^^^^^^^
+  File "<template>", line 52, in macro
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/sandbox.py", line 401, in call
+    return __context.call(__obj, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/jinja2/runtime.py", line 303, in call
+    return __obj(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt_common/record.py", line 538, in record_replay_wrapper
+    return func_to_record(*call_args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/base/impl.py", line 523, in execute
+    return self.connections.execute(sql=sql, auto_begin=auto_begin, fetch=fetch, limit=limit)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/duckdb/connections.py", line 145, in execute
+    return super().execute(sql, auto_begin, fetch, limit)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/sql/connections.py", line 219, in execute
+    _, cursor = self.add_query(sql, auto_begin)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/sql/connections.py", line 131, in add_query
+    with self.exception_handler(sql):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.15/Frameworks/Python.framework/Versions/3.12/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/duckdb/connections.py", line 117, in exception_handler
+    self.rollback_if_open()
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/base/connections.py", line 125, in rollback_if_open
+    if conn is not None and conn.handle and conn.transaction_open:
+                            ^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/contracts/connection.py", line 96, in handle
+    self._handle.resolve(self)
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/contracts/connection.py", line 120, in resolve
+    return self.opener(connection)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/duckdb/connections.py", line 68, in open
+    connection.handle = cls._ENV.handle()
+                        ^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/duckdb/environments/local.py", line 79, in handle
+    self.conn = self.initialize_db(self.creds, self._plugins)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/duckdb/environments/__init__.py", line 164, in initialize_db
+    conn = duckdb.connect(creds.path, read_only=False, config=config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_duckdb.IOException: IO Error: Cannot open file "/Users/kyreesullivan/de_workspace/pipelines/processing/dbt/data/silver/workspace.duckdb": No such file or directory
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/cli/requires.py", line 198, in wrapper
+    result, success = func(*args, **kwargs)
+                      ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/cli/requires.py", line 144, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/cli/requires.py", line 295, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/cli/requires.py", line 340, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/cli/requires.py", line 387, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/cli/requires.py", line 404, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/cli/main.py", line 609, in run
+    results = task.run()
+              ^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/task/runnable.py", line 775, in run
+    result = self.execute_with_hooks(selected_uids)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/task/runnable.py", line 701, in execute_with_hooks
+    before_run_status = self.before_run(adapter, selected_uids)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/task/run.py", line 1313, in before_run
+    self.create_schemas(adapter, required_schemas)
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/task/runnable.py", line 883, in create_schemas
+    existing_schemas_lowered.update(ls_future.result())
+                                    ^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.15/Frameworks/Python.framework/Versions/3.12/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.15/Frameworks/Python.framework/Versions/3.12/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/opt/homebrew/Cellar/python@3.12/3.12.15/Frameworks/Python.framework/Versions/3.12/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt_common/utils/executor.py", line 20, in connected
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/task/runnable.py", line 858, in list_schemas
+    for s in adapter.list_schemas(database_quoted)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/sql/impl.py", line 219, in list_schemas
+    results = self.execute_macro(LIST_SCHEMAS_MACRO_NAME, kwargs={"database": database})
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/base/impl.py", line 1371, in execute_macro
+    with self.connections.exception_handler(f"macro {macro_name}"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.12/3.12.15/Frameworks/Python.framework/Versions/3.12/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/duckdb/connections.py", line 117, in exception_handler
+    self.rollback_if_open()
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/base/connections.py", line 125, in rollback_if_open
+    if conn is not None and conn.handle and conn.transaction_open:
+                            ^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/contracts/connection.py", line 96, in handle
+    self._handle.resolve(self)
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/contracts/connection.py", line 120, in resolve
+    return self.opener(connection)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/duckdb/connections.py", line 68, in open
+    connection.handle = cls._ENV.handle()
+                        ^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/duckdb/environments/local.py", line 79, in handle
+    self.conn = self.initialize_db(self.creds, self._plugins)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kyreesullivan/de_workspace/.venv/lib/python3.12/site-packages/dbt/adapters/duckdb/environments/__init__.py", line 164, in initialize_db
+    conn = duckdb.connect(creds.path, read_only=False, config=config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_duckdb.IOException: IO Error: Cannot open file "/Users/kyreesullivan/de_workspace/pipelines/processing/dbt/data/silver/workspace.duckdb": No such file or directory
+
+[0m21:35:04.071609 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": false, "command_wall_clock_time": 0.36869237, "process_in_blocks": "0", "process_kernel_time": 0.128381, "process_mem_max_rss": "154451968", "process_out_blocks": "0", "process_user_time": 0.858294}
+[0m21:35:04.071760 [debug] [MainThread]: Command `dbt run` failed at 21:35:04.071728 after 0.37 seconds
+[0m21:35:04.071878 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x109140380>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10a574440>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10aac7e00>]}
+[0m21:35:04.071994 [debug] [MainThread]: Flushing usage events
+[0m21:35:04.155174 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m22:08:43.677841 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10b34a240>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10bf27c80>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10bf27a40>]}
+
+
+============================== 22:08:43.680418 | f4638847-334f-4666-aea3-79516d6b1934 ==============================
+[0m22:08:43.680418 [info ] [MainThread]: Running with dbt=1.12.5
+[0m22:08:43.680671 [debug] [MainThread]: running dbt with arguments {'log_path': '/Users/kyreesullivan/de_workspace/pipelines/processing/dbt/logs', 'partial_parse': 'True', 'debug': 'False', 'hints_enabled': 'True', 'write_json': 'True', 'log_cache_events': 'False', 'version_check': 'True', 'log_format': 'default', 'introspect': 'True', 'static_parser': 'True', 'no_print': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'cache_selected_only': 'False', 'quiet': 'False', 'warn_error': 'None', 'invocation_command': 'dbt run --select stg_orders --profiles-dir /Users/kyreesullivan/de_workspace/pipelines/processing/dbt', 'fail_fast': 'False', 'indirect_selection': 'eager', 'send_anonymous_usage_stats': 'True', 'use_colors': 'True', 'printer_width': '80', 'maximum_seed_size_mib': '1', 'empty': 'False', 'profiles_dir': '/Users/kyreesullivan/de_workspace/pipelines/processing/dbt', 'target_path': 'None', 'use_experimental_parser': 'False'}
+[0m22:08:43.776241 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'f4638847-334f-4666-aea3-79516d6b1934', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c193fe0>]}
+[0m22:08:43.798786 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'f4638847-334f-4666-aea3-79516d6b1934', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10b462360>]}
+[0m22:08:43.800031 [info ] [MainThread]: Registered adapter: duckdb=1.11.0
+[0m22:08:43.848978 [debug] [MainThread]: checksum: 8aa2bf27f5dbbd8f3613a18ee0fca90edfb16aeb096be0b0d80f9cc9d4a73669, vars: {}, profile: de_workspace, target: dev, version: 1.12.5
+[0m22:08:43.889402 [info ] [MainThread]: Unable to do partial parsing because profile has changed
+[0m22:08:43.889598 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': 'f4638847-334f-4666-aea3-79516d6b1934', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c20fbf0>]}
+[0m22:08:44.430522 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'f4638847-334f-4666-aea3-79516d6b1934', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c7dcd40>]}
+[0m22:08:44.464694 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/kyreesullivan/de_workspace/pipelines/processing/dbt/target/manifest.json
+[0m22:08:44.466597 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/kyreesullivan/de_workspace/pipelines/processing/dbt/target/semantic_manifest.json
+[0m22:08:44.476676 [debug] [MainThread]: Wrote artifact OsiDocument to /Users/kyreesullivan/de_workspace/pipelines/processing/dbt/target/osi_document.json
+[0m22:08:44.481852 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'f4638847-334f-4666-aea3-79516d6b1934', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c9ac350>]}
+[0m22:08:44.482017 [info ] [MainThread]: Found 2 models, 5 data tests, 500 macros
+[0m22:08:44.482136 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'f4638847-334f-4666-aea3-79516d6b1934', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c6371a0>]}
+[0m22:08:44.482680 [info ] [MainThread]: 
+[0m22:08:44.482792 [info ] [MainThread]: Concurrency: 1 threads (target='dev')
+[0m22:08:44.482879 [info ] [MainThread]: 
+[0m22:08:44.483043 [debug] [MainThread]: Acquiring new duckdb connection 'master'
+[0m22:08:44.483361 [debug] [ThreadPool]: Acquiring new duckdb connection 'list_workspace'
+[0m22:08:44.513688 [debug] [ThreadPool]: Using duckdb connection "list_workspace"
+[0m22:08:44.513817 [debug] [ThreadPool]: On list_workspace: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "de_workspace", "target_name": "dev", "connection_name": "list_workspace"} */
+
+    
+    select schema_name
+    from system.information_schema.schemata
+    
+    where lower(catalog_name) = '"workspace"'
+    
+  
+  
+[0m22:08:44.513910 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m22:08:44.697832 [debug] [ThreadPool]: SQL status: OK in 0.184 seconds
+[0m22:08:44.699242 [debug] [ThreadPool]: On list_workspace: Close
+[0m22:08:44.699558 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_workspace, now create_workspace_main)
+[0m22:08:44.699724 [debug] [ThreadPool]: Creating schema "database: "workspace"
+schema: "main"
+"
+[0m22:08:44.702618 [debug] [ThreadPool]: Using duckdb connection "create_workspace_main"
+[0m22:08:44.702735 [debug] [ThreadPool]: On create_workspace_main: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "de_workspace", "target_name": "dev", "connection_name": "create_workspace_main"} */
+
+    
+        select type from duckdb_databases()
+        where lower(database_name)='workspace'
+        and type != 'duckdb'
+    
+  
+[0m22:08:44.702824 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m22:08:44.703639 [debug] [ThreadPool]: SQL status: OK in 0.001 seconds
+[0m22:08:44.704112 [debug] [ThreadPool]: Using duckdb connection "create_workspace_main"
+[0m22:08:44.704211 [debug] [ThreadPool]: On create_workspace_main: BEGIN
+[0m22:08:44.704377 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m22:08:44.704486 [debug] [ThreadPool]: Using duckdb connection "create_workspace_main"
+[0m22:08:44.704582 [debug] [ThreadPool]: On create_workspace_main: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "de_workspace", "target_name": "dev", "connection_name": "create_workspace_main"} */
+
+    
+    
+        create schema if not exists "workspace"."main"
+    
+[0m22:08:44.705057 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m22:08:44.705341 [debug] [ThreadPool]: On create_workspace_main: COMMIT
+[0m22:08:44.705435 [debug] [ThreadPool]: Using duckdb connection "create_workspace_main"
+[0m22:08:44.705514 [debug] [ThreadPool]: On create_workspace_main: COMMIT
+[0m22:08:44.705671 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m22:08:44.705826 [debug] [ThreadPool]: On create_workspace_main: Close
+[0m22:08:44.707734 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly create_workspace_main, now list_workspace_main)
+[0m22:08:44.709377 [debug] [ThreadPool]: Using duckdb connection "list_workspace_main"
+[0m22:08:44.709472 [debug] [ThreadPool]: On list_workspace_main: BEGIN
+[0m22:08:44.709551 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m22:08:44.709699 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m22:08:44.709782 [debug] [ThreadPool]: Using duckdb connection "list_workspace_main"
+[0m22:08:44.709885 [debug] [ThreadPool]: On list_workspace_main: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "de_workspace", "target_name": "dev", "connection_name": "list_workspace_main"} */
+select
+      'workspace' as database,
+      table_name as name,
+      table_schema as schema,
+      CASE table_type
+        WHEN 'BASE TABLE' THEN 'table'
+        WHEN 'VIEW' THEN 'view'
+        WHEN 'LOCAL TEMPORARY' THEN 'table'
+        END as type
+    from system.information_schema.tables
+    where lower(table_schema) = 'main'
+    and lower(table_catalog) = 'workspace'
+  
+[0m22:08:44.712297 [debug] [ThreadPool]: SQL status: OK in 0.002 seconds
+[0m22:08:44.712876 [debug] [ThreadPool]: On list_workspace_main: ROLLBACK
+[0m22:08:44.713008 [debug] [ThreadPool]: On list_workspace_main: Close
+[0m22:08:44.713195 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'f4638847-334f-4666-aea3-79516d6b1934', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10ccf3560>]}
+[0m22:08:44.713364 [debug] [MainThread]: Using duckdb connection "master"
+[0m22:08:44.713452 [debug] [MainThread]: On master: BEGIN
+[0m22:08:44.713534 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m22:08:44.713701 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m22:08:44.713852 [debug] [MainThread]: On master: COMMIT
+[0m22:08:44.713965 [debug] [MainThread]: Using duckdb connection "master"
+[0m22:08:44.714061 [debug] [MainThread]: On master: COMMIT
+[0m22:08:44.714204 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m22:08:44.714300 [debug] [MainThread]: On master: Close
+[0m22:08:44.716276 [debug] [Thread-1 (]: Began running node model.de_workspace_dbt.stg_orders
+[0m22:08:44.716453 [info ] [Thread-1 (]: 1 of 1 START sql view model main.stg_orders .................................... [RUN]
+[0m22:08:44.716600 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_workspace_main, now model.de_workspace_dbt.stg_orders)
+[0m22:08:44.716707 [debug] [Thread-1 (]: Began compiling node model.de_workspace_dbt.stg_orders
+[0m22:08:44.718604 [debug] [Thread-1 (]: Writing injected SQL for node "model.de_workspace_dbt.stg_orders"
+[0m22:08:44.718979 [debug] [Thread-1 (]: Began executing node model.de_workspace_dbt.stg_orders
+[0m22:08:44.729742 [debug] [Thread-1 (]: Writing runtime sql for node "model.de_workspace_dbt.stg_orders"
+[0m22:08:44.730115 [debug] [Thread-1 (]: Using duckdb connection "model.de_workspace_dbt.stg_orders"
+[0m22:08:44.730238 [debug] [Thread-1 (]: On model.de_workspace_dbt.stg_orders: BEGIN
+[0m22:08:44.730342 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m22:08:44.730527 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m22:08:44.730634 [debug] [Thread-1 (]: Using duckdb connection "model.de_workspace_dbt.stg_orders"
+[0m22:08:44.730747 [debug] [Thread-1 (]: On model.de_workspace_dbt.stg_orders: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "de_workspace", "target_name": "dev", "node_id": "model.de_workspace_dbt.stg_orders"} */
+
+  
+  create view "workspace"."main"."stg_orders__dbt_tmp" as (
+    WITH raw_data AS (
+    SELECT * FROM delta_scan('data/bronze/orders_delta')
+)
+SELECT DISTINCT ON (event_id)
+    event_id,
+    CAST(timestamp AS TIMESTAMPTZ) AS timestamp,
+    customer_id,
+    CAST(amount AS DOUBLE) AS amount,
+    currency
+FROM raw_data
+  );
+
+[0m22:08:44.735520 [debug] [Thread-1 (]: DuckDB adapter: duckdb error: IO Error: DeltaKernel InvalidTableLocationError (28): Invalid table location: Path does not exist: "data/bronze/orders_delta/".
+
+LINE 6:     SELECT * FROM delta_scan('data/bronze/orders_delta')
+                          ^
+[0m22:08:44.735645 [debug] [Thread-1 (]: DuckDB adapter: Error running SQL: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "de_workspace", "target_name": "dev", "node_id": "model.de_workspace_dbt.stg_orders"} */
+
+  
+  create view "workspace"."main"."stg_orders__dbt_tmp" as (
+    WITH raw_data AS (
+    SELECT * FROM delta_scan('data/bronze/orders_delta')
+)
+SELECT DISTINCT ON (event_id)
+    event_id,
+    CAST(timestamp AS TIMESTAMPTZ) AS timestamp,
+    customer_id,
+    CAST(amount AS DOUBLE) AS amount,
+    currency
+FROM raw_data
+  );
+
+[0m22:08:44.735762 [debug] [Thread-1 (]: DuckDB adapter: Rolling back transaction.
+[0m22:08:44.735866 [debug] [Thread-1 (]: On model.de_workspace_dbt.stg_orders: ROLLBACK
+[0m22:08:44.736058 [debug] [Thread-1 (]: On model.de_workspace_dbt.stg_orders: Close
+[0m22:08:44.740967 [debug] [Thread-1 (]: Runtime Error in model stg_orders (models/staging/stg_orders.sql)
+  IO Error: DeltaKernel InvalidTableLocationError (28): Invalid table location: Path does not exist: "data/bronze/orders_delta/".
+  
+  LINE 6:     SELECT * FROM delta_scan('data/bronze/orders_delta')
+                            ^
+[0m22:08:44.741740 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'f4638847-334f-4666-aea3-79516d6b1934', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c749cd0>]}
+[0m22:08:44.741952 [error] [Thread-1 (]: 1 of 1 ERROR creating sql view model main.stg_orders ........................... [[31mERROR[0m in 0.02s]
+[0m22:08:44.742153 [debug] [Thread-1 (]: Finished running node model.de_workspace_dbt.stg_orders
+[0m22:08:44.742333 [debug] [Thread-4 (]: Marking all children of 'model.de_workspace_dbt.stg_orders' to be skipped because of status 'error'.  Reason: Runtime Error in model stg_orders (models/staging/stg_orders.sql)
+  IO Error: DeltaKernel InvalidTableLocationError (28): Invalid table location: Path does not exist: "data/bronze/orders_delta/".
+  
+  LINE 6:     SELECT * FROM delta_scan('data/bronze/orders_delta')
+                            ^.
+[0m22:08:44.742957 [debug] [MainThread]: Using duckdb connection "master"
+[0m22:08:44.743075 [debug] [MainThread]: On master: BEGIN
+[0m22:08:44.743172 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m22:08:44.743313 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m22:08:44.743408 [debug] [MainThread]: On master: COMMIT
+[0m22:08:44.743493 [debug] [MainThread]: Using duckdb connection "master"
+[0m22:08:44.743576 [debug] [MainThread]: On master: COMMIT
+[0m22:08:44.743699 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m22:08:44.743786 [debug] [MainThread]: On master: Close
+[0m22:08:44.743911 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m22:08:44.743998 [debug] [MainThread]: Connection 'model.de_workspace_dbt.stg_orders' was properly closed.
+[0m22:08:44.744094 [info ] [MainThread]: 
+[0m22:08:44.744194 [info ] [MainThread]: Finished running 1 view model in 0 hours 0 minutes and 0.26 seconds (0.26s).
+[0m22:08:44.744421 [debug] [MainThread]: Command end result
+[0m22:08:44.758055 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/kyreesullivan/de_workspace/pipelines/processing/dbt/target/manifest.json
+[0m22:08:44.759171 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/kyreesullivan/de_workspace/pipelines/processing/dbt/target/semantic_manifest.json
+[0m22:08:44.760233 [debug] [MainThread]: Wrote artifact OsiDocument to /Users/kyreesullivan/de_workspace/pipelines/processing/dbt/target/osi_document.json
+[0m22:08:44.762775 [debug] [MainThread]: Wrote artifact RunExecutionResult to /Users/kyreesullivan/de_workspace/pipelines/processing/dbt/target/run_results.json
+[0m22:08:44.762874 [info ] [MainThread]: 
+[0m22:08:44.762998 [info ] [MainThread]: [31mCompleted with 1 error, 0 partial successes, and 0 warnings:[0m
+[0m22:08:44.763096 [info ] [MainThread]: 
+[0m22:08:44.763216 [error] [MainThread]: [[31mERROR[0m]: in model stg_orders (models/staging/stg_orders.sql)
+[0m22:08:44.763336 [error] [MainThread]:   Runtime Error in model stg_orders (models/staging/stg_orders.sql)
+  IO Error: DeltaKernel InvalidTableLocationError (28): Invalid table location: Path does not exist: "data/bronze/orders_delta/".
+  
+  LINE 6:     SELECT * FROM delta_scan('data/bronze/orders_delta')
+                            ^
+[0m22:08:44.763427 [info ] [MainThread]: 
+[0m22:08:44.763531 [info ] [MainThread]:   compiled code at target/compiled/de_workspace_dbt/models/staging/stg_orders.sql
+[0m22:08:44.763616 [info ] [MainThread]: 
+[0m22:08:44.763719 [info ] [MainThread]: Done. PASS=0 WARN=0 ERROR=1 SKIP=0 NO-OP=0 REUSED=0 TOTAL=1
+[0m22:08:44.770115 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": false, "command_wall_clock_time": 1.1308782, "process_in_blocks": "0", "process_kernel_time": 0.217626, "process_mem_max_rss": "177618944", "process_out_blocks": "0", "process_user_time": 1.545863}
+[0m22:08:44.770262 [debug] [MainThread]: Command `dbt run` failed at 22:08:44.770234 after 1.13 seconds
+[0m22:08:44.770382 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10a815df0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10bf27ad0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x109c2e600>]}
+[0m22:08:44.770489 [debug] [MainThread]: Flushing usage events
+[0m22:08:45.039906 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m22:11:29.371859 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c23eed0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c283bc0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c283980>]}
+
+
+============================== 22:11:29.374431 | 6426a78a-135d-494a-8102-caeeba290073 ==============================
+[0m22:11:29.374431 [info ] [MainThread]: Running with dbt=1.12.5
+[0m22:11:29.374676 [debug] [MainThread]: running dbt with arguments {'log_cache_events': 'False', 'cache_selected_only': 'False', 'partial_parse': 'True', 'empty': 'False', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'maximum_seed_size_mib': '1', 'use_experimental_parser': 'False', 'log_path': '/Users/kyreesullivan/de_workspace/pipelines/processing/dbt/logs', 'fail_fast': 'False', 'hints_enabled': 'True', 'profiles_dir': '/Users/kyreesullivan/de_workspace/pipelines/processing/dbt', 'no_print': 'None', 'debug': 'False', 'invocation_command': 'dbt run --select stg_orders --profiles-dir /Users/kyreesullivan/de_workspace/pipelines/processing/dbt', 'static_parser': 'True', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'indirect_selection': 'eager', 'log_format': 'default', 'warn_error': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'use_colors': 'True', 'version_check': 'True'}
+[0m22:11:29.473092 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '6426a78a-135d-494a-8102-caeeba290073', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c3c1ee0>]}
+[0m22:11:29.496056 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '6426a78a-135d-494a-8102-caeeba290073', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1098795e0>]}
+[0m22:11:29.497409 [info ] [MainThread]: Registered adapter: duckdb=1.11.0
+[0m22:11:29.547628 [debug] [MainThread]: checksum: 8aa2bf27f5dbbd8f3613a18ee0fca90edfb16aeb096be0b0d80f9cc9d4a73669, vars: {}, profile: de_workspace, target: dev, version: 1.12.5
+[0m22:11:29.611666 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 1 files changed.
+[0m22:11:29.611944 [debug] [MainThread]: Partial parsing: updated file: de_workspace_dbt://models/staging/stg_orders.sql
+[0m22:11:29.841930 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '6426a78a-135d-494a-8102-caeeba290073', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c531af0>]}
+[0m22:11:29.876366 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/kyreesullivan/de_workspace/pipelines/processing/dbt/target/manifest.json
+[0m22:11:29.878520 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/kyreesullivan/de_workspace/pipelines/processing/dbt/target/semantic_manifest.json
+[0m22:11:29.888208 [debug] [MainThread]: Wrote artifact OsiDocument to /Users/kyreesullivan/de_workspace/pipelines/processing/dbt/target/osi_document.json
+[0m22:11:29.893631 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '6426a78a-135d-494a-8102-caeeba290073', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10cbeb4d0>]}
+[0m22:11:29.893799 [info ] [MainThread]: Found 2 models, 5 data tests, 500 macros
+[0m22:11:29.893917 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '6426a78a-135d-494a-8102-caeeba290073', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x109fcbda0>]}
+[0m22:11:29.894478 [info ] [MainThread]: 
+[0m22:11:29.894593 [info ] [MainThread]: Concurrency: 1 threads (target='dev')
+[0m22:11:29.894680 [info ] [MainThread]: 
+[0m22:11:29.894851 [debug] [MainThread]: Acquiring new duckdb connection 'master'
+[0m22:11:29.895176 [debug] [ThreadPool]: Acquiring new duckdb connection 'list_workspace'
+[0m22:11:29.923976 [debug] [ThreadPool]: Using duckdb connection "list_workspace"
+[0m22:11:29.924121 [debug] [ThreadPool]: On list_workspace: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "de_workspace", "target_name": "dev", "connection_name": "list_workspace"} */
+
+    
+    select schema_name
+    from system.information_schema.schemata
+    
+    where lower(catalog_name) = '"workspace"'
+    
+  
+  
+[0m22:11:29.924225 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m22:11:30.082491 [debug] [ThreadPool]: SQL status: OK in 0.158 seconds
+[0m22:11:30.083584 [debug] [ThreadPool]: On list_workspace: Close
+[0m22:11:30.083887 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_workspace, now create_workspace_main)
+[0m22:11:30.084057 [debug] [ThreadPool]: Creating schema "database: "workspace"
+schema: "main"
+"
+[0m22:11:30.086937 [debug] [ThreadPool]: Using duckdb connection "create_workspace_main"
+[0m22:11:30.087050 [debug] [ThreadPool]: On create_workspace_main: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "de_workspace", "target_name": "dev", "connection_name": "create_workspace_main"} */
+
+    
+        select type from duckdb_databases()
+        where lower(database_name)='workspace'
+        and type != 'duckdb'
+    
+  
+[0m22:11:30.087151 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m22:11:30.087928 [debug] [ThreadPool]: SQL status: OK in 0.001 seconds
+[0m22:11:30.088379 [debug] [ThreadPool]: Using duckdb connection "create_workspace_main"
+[0m22:11:30.088468 [debug] [ThreadPool]: On create_workspace_main: BEGIN
+[0m22:11:30.088600 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m22:11:30.088688 [debug] [ThreadPool]: Using duckdb connection "create_workspace_main"
+[0m22:11:30.088778 [debug] [ThreadPool]: On create_workspace_main: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "de_workspace", "target_name": "dev", "connection_name": "create_workspace_main"} */
+
+    
+    
+        create schema if not exists "workspace"."main"
+    
+[0m22:11:30.088946 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m22:11:30.089225 [debug] [ThreadPool]: On create_workspace_main: COMMIT
+[0m22:11:30.089316 [debug] [ThreadPool]: Using duckdb connection "create_workspace_main"
+[0m22:11:30.089396 [debug] [ThreadPool]: On create_workspace_main: COMMIT
+[0m22:11:30.089511 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m22:11:30.089603 [debug] [ThreadPool]: On create_workspace_main: Close
+[0m22:11:30.091507 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly create_workspace_main, now list_workspace_main)
+[0m22:11:30.093222 [debug] [ThreadPool]: Using duckdb connection "list_workspace_main"
+[0m22:11:30.093328 [debug] [ThreadPool]: On list_workspace_main: BEGIN
+[0m22:11:30.093410 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m22:11:30.093555 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m22:11:30.093643 [debug] [ThreadPool]: Using duckdb connection "list_workspace_main"
+[0m22:11:30.093738 [debug] [ThreadPool]: On list_workspace_main: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "de_workspace", "target_name": "dev", "connection_name": "list_workspace_main"} */
+select
+      'workspace' as database,
+      table_name as name,
+      table_schema as schema,
+      CASE table_type
+        WHEN 'BASE TABLE' THEN 'table'
+        WHEN 'VIEW' THEN 'view'
+        WHEN 'LOCAL TEMPORARY' THEN 'table'
+        END as type
+    from system.information_schema.tables
+    where lower(table_schema) = 'main'
+    and lower(table_catalog) = 'workspace'
+  
+[0m22:11:30.095724 [debug] [ThreadPool]: SQL status: OK in 0.002 seconds
+[0m22:11:30.096530 [debug] [ThreadPool]: On list_workspace_main: ROLLBACK
+[0m22:11:30.096709 [debug] [ThreadPool]: On list_workspace_main: Close
+[0m22:11:30.096917 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '6426a78a-135d-494a-8102-caeeba290073', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c972420>]}
+[0m22:11:30.097088 [debug] [MainThread]: Using duckdb connection "master"
+[0m22:11:30.097180 [debug] [MainThread]: On master: BEGIN
+[0m22:11:30.097259 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m22:11:30.097401 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m22:11:30.097494 [debug] [MainThread]: On master: COMMIT
+[0m22:11:30.097583 [debug] [MainThread]: Using duckdb connection "master"
+[0m22:11:30.097667 [debug] [MainThread]: On master: COMMIT
+[0m22:11:30.097814 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m22:11:30.097968 [debug] [MainThread]: On master: Close
+[0m22:11:30.099487 [debug] [Thread-1 (]: Began running node model.de_workspace_dbt.stg_orders
+[0m22:11:30.099655 [info ] [Thread-1 (]: 1 of 1 START sql view model main.stg_orders .................................... [RUN]
+[0m22:11:30.099807 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_workspace_main, now model.de_workspace_dbt.stg_orders)
+[0m22:11:30.099915 [debug] [Thread-1 (]: Began compiling node model.de_workspace_dbt.stg_orders
+[0m22:11:30.101790 [debug] [Thread-1 (]: Writing injected SQL for node "model.de_workspace_dbt.stg_orders"
+[0m22:11:30.102168 [debug] [Thread-1 (]: Began executing node model.de_workspace_dbt.stg_orders
+[0m22:11:30.112988 [debug] [Thread-1 (]: Writing runtime sql for node "model.de_workspace_dbt.stg_orders"
+[0m22:11:30.113250 [debug] [Thread-1 (]: Using duckdb connection "model.de_workspace_dbt.stg_orders"
+[0m22:11:30.113369 [debug] [Thread-1 (]: On model.de_workspace_dbt.stg_orders: BEGIN
+[0m22:11:30.113474 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m22:11:30.113660 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m22:11:30.113769 [debug] [Thread-1 (]: Using duckdb connection "model.de_workspace_dbt.stg_orders"
+[0m22:11:30.113886 [debug] [Thread-1 (]: On model.de_workspace_dbt.stg_orders: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "de_workspace", "target_name": "dev", "node_id": "model.de_workspace_dbt.stg_orders"} */
+
+  
+  create view "workspace"."main"."stg_orders__dbt_tmp" as (
+    WITH raw_data AS (
+    SELECT * FROM delta_scan('/Users/kyreesullivan/de_workspace/data/bronze/orders_delta')
+)
+SELECT DISTINCT ON (event_id)
+    event_id,
+    CAST(timestamp AS TIMESTAMPTZ) AS timestamp,
+    customer_id,
+    CAST(amount AS DOUBLE) AS amount,
+    currency
+FROM raw_data
+  );
+
+[0m22:11:30.118480 [debug] [Thread-1 (]: SQL status: OK in 0.004 seconds
+[0m22:11:30.120366 [debug] [Thread-1 (]: Using duckdb connection "model.de_workspace_dbt.stg_orders"
+[0m22:11:30.120480 [debug] [Thread-1 (]: On model.de_workspace_dbt.stg_orders: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "de_workspace", "target_name": "dev", "node_id": "model.de_workspace_dbt.stg_orders"} */
+alter view "workspace"."main"."stg_orders__dbt_tmp" rename to "stg_orders"
+[0m22:11:30.120944 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m22:11:30.125163 [debug] [Thread-1 (]: On model.de_workspace_dbt.stg_orders: COMMIT
+[0m22:11:30.125286 [debug] [Thread-1 (]: Using duckdb connection "model.de_workspace_dbt.stg_orders"
+[0m22:11:30.125388 [debug] [Thread-1 (]: On model.de_workspace_dbt.stg_orders: COMMIT
+[0m22:11:30.125757 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m22:11:30.127876 [debug] [Thread-1 (]: Using duckdb connection "model.de_workspace_dbt.stg_orders"
+[0m22:11:30.127996 [debug] [Thread-1 (]: On model.de_workspace_dbt.stg_orders: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "de_workspace", "target_name": "dev", "node_id": "model.de_workspace_dbt.stg_orders"} */
+
+      drop view if exists "workspace"."main"."stg_orders__dbt_backup" cascade
+    
+[0m22:11:30.128165 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m22:11:30.129036 [debug] [Thread-1 (]: On model.de_workspace_dbt.stg_orders: Close
+[0m22:11:30.129833 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '6426a78a-135d-494a-8102-caeeba290073', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c9eef00>]}
+[0m22:11:30.130061 [info ] [Thread-1 (]: 1 of 1 OK created sql view model main.stg_orders ............................... [[32mOK[0m in 0.03s]
+[0m22:11:30.130255 [debug] [Thread-1 (]: Finished running node model.de_workspace_dbt.stg_orders
+[0m22:11:30.130663 [debug] [MainThread]: Using duckdb connection "master"
+[0m22:11:30.130764 [debug] [MainThread]: On master: BEGIN
+[0m22:11:30.130850 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m22:11:30.131004 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m22:11:30.131123 [debug] [MainThread]: On master: COMMIT
+[0m22:11:30.131224 [debug] [MainThread]: Using duckdb connection "master"
+[0m22:11:30.131313 [debug] [MainThread]: On master: COMMIT
+[0m22:11:30.131449 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m22:11:30.131545 [debug] [MainThread]: On master: Close
+[0m22:11:30.131686 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m22:11:30.131777 [debug] [MainThread]: Connection 'model.de_workspace_dbt.stg_orders' was properly closed.
+[0m22:11:30.131870 [info ] [MainThread]: 
+[0m22:11:30.131969 [info ] [MainThread]: Finished running 1 view model in 0 hours 0 minutes and 0.24 seconds (0.24s).
+[0m22:11:30.132188 [debug] [MainThread]: Command end result
+[0m22:11:30.145239 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/kyreesullivan/de_workspace/pipelines/processing/dbt/target/manifest.json
+[0m22:11:30.146407 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/kyreesullivan/de_workspace/pipelines/processing/dbt/target/semantic_manifest.json
+[0m22:11:30.147465 [debug] [MainThread]: Wrote artifact OsiDocument to /Users/kyreesullivan/de_workspace/pipelines/processing/dbt/target/osi_document.json
+[0m22:11:30.149978 [debug] [MainThread]: Wrote artifact RunExecutionResult to /Users/kyreesullivan/de_workspace/pipelines/processing/dbt/target/run_results.json
+[0m22:11:30.150085 [info ] [MainThread]: 
+[0m22:11:30.150217 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m22:11:30.150314 [info ] [MainThread]: 
+[0m22:11:30.150422 [info ] [MainThread]: Done. PASS=1 WARN=0 ERROR=0 SKIP=0 NO-OP=0 REUSED=0 TOTAL=1
+[0m22:11:30.152407 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": true, "command_wall_clock_time": 0.8177922, "process_in_blocks": "0", "process_kernel_time": 0.218522, "process_mem_max_rss": "178028544", "process_out_blocks": "0", "process_user_time": 1.276281}
+[0m22:11:30.152557 [debug] [MainThread]: Command `dbt run` succeeded at 22:11:30.152526 after 0.82 seconds
+[0m22:11:30.152673 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c283b60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10cb2b1d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10cf4ab70>]}
+[0m22:11:30.152783 [debug] [MainThread]: Flushing usage events
+[0m22:11:30.362516 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m22:11:31.365370 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10bd686b0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10bf03b60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10bf03950>]}
+
+
+============================== 22:11:31.367241 | abd91aff-7eee-4295-9aac-c1caed706f1e ==============================
+[0m22:11:31.367241 [info ] [MainThread]: Running with dbt=1.12.5
+[0m22:11:31.367480 [debug] [MainThread]: running dbt with arguments {'write_json': 'True', 'log_format': 'default', 'quiet': 'False', 'no_print': 'None', 'partial_parse': 'True', 'static_parser': 'True', 'invocation_command': 'dbt run --select fct_daily_sales --profiles-dir /Users/kyreesullivan/de_workspace/pipelines/processing/dbt', 'maximum_seed_size_mib': '1', 'cache_selected_only': 'False', 'use_colors': 'True', 'debug': 'False', 'hints_enabled': 'True', 'empty': 'False', 'log_cache_events': 'False', 'printer_width': '80', 'send_anonymous_usage_stats': 'True', 'log_path': '/Users/kyreesullivan/de_workspace/pipelines/processing/dbt/logs', 'target_path': 'None', 'introspect': 'True', 'version_check': 'True', 'fail_fast': 'False', 'indirect_selection': 'eager', 'warn_error': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'profiles_dir': '/Users/kyreesullivan/de_workspace/pipelines/processing/dbt', 'use_experimental_parser': 'False'}
+[0m22:11:31.453704 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'abd91aff-7eee-4295-9aac-c1caed706f1e', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c11b650>]}
+[0m22:11:31.476844 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'abd91aff-7eee-4295-9aac-c1caed706f1e', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10ad80ec0>]}
+[0m22:11:31.477749 [info ] [MainThread]: Registered adapter: duckdb=1.11.0
+[0m22:11:31.524443 [debug] [MainThread]: checksum: 8aa2bf27f5dbbd8f3613a18ee0fca90edfb16aeb096be0b0d80f9cc9d4a73669, vars: {}, profile: de_workspace, target: dev, version: 1.12.5
+[0m22:11:31.574341 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m22:11:31.574534 [debug] [MainThread]: Nothing changed, skipping partial parsing.
+[0m22:11:31.574639 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m22:11:31.578782 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'abd91aff-7eee-4295-9aac-c1caed706f1e', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10bf038f0>]}
+[0m22:11:31.627127 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/kyreesullivan/de_workspace/pipelines/processing/dbt/target/manifest.json
+[0m22:11:31.628576 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/kyreesullivan/de_workspace/pipelines/processing/dbt/target/semantic_manifest.json
+[0m22:11:31.634534 [debug] [MainThread]: Wrote artifact OsiDocument to /Users/kyreesullivan/de_workspace/pipelines/processing/dbt/target/osi_document.json
+[0m22:11:31.637998 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'abd91aff-7eee-4295-9aac-c1caed706f1e', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c452a80>]}
+[0m22:11:31.638170 [info ] [MainThread]: Found 2 models, 5 data tests, 500 macros
+[0m22:11:31.638282 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'abd91aff-7eee-4295-9aac-c1caed706f1e', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c46d2e0>]}
+[0m22:11:31.638847 [info ] [MainThread]: 
+[0m22:11:31.638958 [info ] [MainThread]: Concurrency: 1 threads (target='dev')
+[0m22:11:31.639046 [info ] [MainThread]: 
+[0m22:11:31.639236 [debug] [MainThread]: Acquiring new duckdb connection 'master'
+[0m22:11:31.639617 [debug] [ThreadPool]: Acquiring new duckdb connection 'list_workspace'
+[0m22:11:31.682355 [debug] [ThreadPool]: Using duckdb connection "list_workspace"
+[0m22:11:31.682542 [debug] [ThreadPool]: On list_workspace: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "de_workspace", "target_name": "dev", "connection_name": "list_workspace"} */
+
+    
+    select schema_name
+    from system.information_schema.schemata
+    
+    where lower(catalog_name) = '"workspace"'
+    
+  
+  
+[0m22:11:31.682657 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m22:11:31.725417 [debug] [ThreadPool]: SQL status: OK in 0.043 seconds
+[0m22:11:31.725984 [debug] [ThreadPool]: On list_workspace: Close
+[0m22:11:31.726257 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_workspace, now create_workspace_main)
+[0m22:11:31.726420 [debug] [ThreadPool]: Creating schema "database: "workspace"
+schema: "main"
+"
+[0m22:11:31.729363 [debug] [ThreadPool]: Using duckdb connection "create_workspace_main"
+[0m22:11:31.729479 [debug] [ThreadPool]: On create_workspace_main: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "de_workspace", "target_name": "dev", "connection_name": "create_workspace_main"} */
+
+    
+        select type from duckdb_databases()
+        where lower(database_name)='workspace'
+        and type != 'duckdb'
+    
+  
+[0m22:11:31.729573 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m22:11:31.729849 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m22:11:31.730289 [debug] [ThreadPool]: Using duckdb connection "create_workspace_main"
+[0m22:11:31.730383 [debug] [ThreadPool]: On create_workspace_main: BEGIN
+[0m22:11:31.730517 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m22:11:31.730603 [debug] [ThreadPool]: Using duckdb connection "create_workspace_main"
+[0m22:11:31.730689 [debug] [ThreadPool]: On create_workspace_main: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "de_workspace", "target_name": "dev", "connection_name": "create_workspace_main"} */
+
+    
+    
+        create schema if not exists "workspace"."main"
+    
+[0m22:11:31.730837 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m22:11:31.731110 [debug] [ThreadPool]: On create_workspace_main: COMMIT
+[0m22:11:31.731209 [debug] [ThreadPool]: Using duckdb connection "create_workspace_main"
+[0m22:11:31.731298 [debug] [ThreadPool]: On create_workspace_main: COMMIT
+[0m22:11:31.731418 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m22:11:31.731505 [debug] [ThreadPool]: On create_workspace_main: Close
+[0m22:11:31.733414 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly create_workspace_main, now list_workspace_main)
+[0m22:11:31.735088 [debug] [ThreadPool]: Using duckdb connection "list_workspace_main"
+[0m22:11:31.735213 [debug] [ThreadPool]: On list_workspace_main: BEGIN
+[0m22:11:31.735302 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m22:11:31.735462 [debug] [ThreadPool]: SQL status: OK in 0.000 seconds
+[0m22:11:31.735548 [debug] [ThreadPool]: Using duckdb connection "list_workspace_main"
+[0m22:11:31.735637 [debug] [ThreadPool]: On list_workspace_main: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "de_workspace", "target_name": "dev", "connection_name": "list_workspace_main"} */
+select
+      'workspace' as database,
+      table_name as name,
+      table_schema as schema,
+      CASE table_type
+        WHEN 'BASE TABLE' THEN 'table'
+        WHEN 'VIEW' THEN 'view'
+        WHEN 'LOCAL TEMPORARY' THEN 'table'
+        END as type
+    from system.information_schema.tables
+    where lower(table_schema) = 'main'
+    and lower(table_catalog) = 'workspace'
+  
+[0m22:11:31.736788 [debug] [ThreadPool]: SQL status: OK in 0.001 seconds
+[0m22:11:31.737288 [debug] [ThreadPool]: On list_workspace_main: ROLLBACK
+[0m22:11:31.737432 [debug] [ThreadPool]: On list_workspace_main: Close
+[0m22:11:31.737682 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'abd91aff-7eee-4295-9aac-c1caed706f1e', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10bf3e1b0>]}
+[0m22:11:31.737828 [debug] [MainThread]: Using duckdb connection "master"
+[0m22:11:31.737912 [debug] [MainThread]: On master: BEGIN
+[0m22:11:31.737993 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m22:11:31.738131 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m22:11:31.738215 [debug] [MainThread]: On master: COMMIT
+[0m22:11:31.738294 [debug] [MainThread]: Using duckdb connection "master"
+[0m22:11:31.738370 [debug] [MainThread]: On master: COMMIT
+[0m22:11:31.738496 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m22:11:31.738592 [debug] [MainThread]: On master: Close
+[0m22:11:31.739277 [debug] [Thread-1 (]: Began running node model.de_workspace_dbt.fct_daily_sales
+[0m22:11:31.739434 [info ] [Thread-1 (]: 1 of 1 START sql table model main.fct_daily_sales .............................. [RUN]
+[0m22:11:31.739573 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_workspace_main, now model.de_workspace_dbt.fct_daily_sales)
+[0m22:11:31.739678 [debug] [Thread-1 (]: Began compiling node model.de_workspace_dbt.fct_daily_sales
+[0m22:11:31.741936 [debug] [Thread-1 (]: Writing injected SQL for node "model.de_workspace_dbt.fct_daily_sales"
+[0m22:11:31.742280 [debug] [Thread-1 (]: Began executing node model.de_workspace_dbt.fct_daily_sales
+[0m22:11:31.761058 [debug] [Thread-1 (]: Writing runtime sql for node "model.de_workspace_dbt.fct_daily_sales"
+[0m22:11:31.761369 [debug] [Thread-1 (]: Using duckdb connection "model.de_workspace_dbt.fct_daily_sales"
+[0m22:11:31.761492 [debug] [Thread-1 (]: On model.de_workspace_dbt.fct_daily_sales: BEGIN
+[0m22:11:31.761597 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m22:11:31.761777 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m22:11:31.761883 [debug] [Thread-1 (]: Using duckdb connection "model.de_workspace_dbt.fct_daily_sales"
+[0m22:11:31.761996 [debug] [Thread-1 (]: On model.de_workspace_dbt.fct_daily_sales: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "de_workspace", "target_name": "dev", "node_id": "model.de_workspace_dbt.fct_daily_sales"} */
+
+    
+
+    create  table
+      "workspace"."main"."fct_daily_sales__dbt_tmp"
+  
+    
+    as (
+      SELECT 
+    CAST(timestamp AT TIME ZONE 'UTC' AS DATE) AS sales_date,
+    currency,
+    COUNT(DISTINCT event_id) AS total_orders,
+    SUM(amount) AS total_revenue
+FROM "workspace"."main"."stg_orders"
+GROUP BY 1, 2
+    );
+    
+  
+[0m22:11:31.767161 [debug] [Thread-1 (]: SQL status: OK in 0.005 seconds
+[0m22:11:31.769218 [debug] [Thread-1 (]: Using duckdb connection "model.de_workspace_dbt.fct_daily_sales"
+[0m22:11:31.769349 [debug] [Thread-1 (]: On model.de_workspace_dbt.fct_daily_sales: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "de_workspace", "target_name": "dev", "node_id": "model.de_workspace_dbt.fct_daily_sales"} */
+alter table "workspace"."main"."fct_daily_sales__dbt_tmp" rename to "fct_daily_sales"
+[0m22:11:31.769561 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m22:11:31.774948 [debug] [Thread-1 (]: On model.de_workspace_dbt.fct_daily_sales: COMMIT
+[0m22:11:31.775087 [debug] [Thread-1 (]: Using duckdb connection "model.de_workspace_dbt.fct_daily_sales"
+[0m22:11:31.775203 [debug] [Thread-1 (]: On model.de_workspace_dbt.fct_daily_sales: COMMIT
+[0m22:11:31.775580 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m22:11:31.777113 [debug] [Thread-1 (]: Using duckdb connection "model.de_workspace_dbt.fct_daily_sales"
+[0m22:11:31.777239 [debug] [Thread-1 (]: On model.de_workspace_dbt.fct_daily_sales: /* {"app": "dbt", "dbt_version": "1.12.5", "profile_name": "de_workspace", "target_name": "dev", "node_id": "model.de_workspace_dbt.fct_daily_sales"} */
+
+      drop table if exists "workspace"."main"."fct_daily_sales__dbt_backup" cascade
+    
+[0m22:11:31.777420 [debug] [Thread-1 (]: SQL status: OK in 0.000 seconds
+[0m22:11:31.778312 [debug] [Thread-1 (]: On model.de_workspace_dbt.fct_daily_sales: Close
+[0m22:11:31.778945 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'abd91aff-7eee-4295-9aac-c1caed706f1e', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x108e67bf0>]}
+[0m22:11:31.779176 [info ] [Thread-1 (]: 1 of 1 OK created sql table model main.fct_daily_sales ......................... [[32mOK[0m in 0.04s]
+[0m22:11:31.779383 [debug] [Thread-1 (]: Finished running node model.de_workspace_dbt.fct_daily_sales
+[0m22:11:31.779802 [debug] [MainThread]: Using duckdb connection "master"
+[0m22:11:31.779914 [debug] [MainThread]: On master: BEGIN
+[0m22:11:31.780005 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m22:11:31.780147 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m22:11:31.780241 [debug] [MainThread]: On master: COMMIT
+[0m22:11:31.780332 [debug] [MainThread]: Using duckdb connection "master"
+[0m22:11:31.780417 [debug] [MainThread]: On master: COMMIT
+[0m22:11:31.780547 [debug] [MainThread]: SQL status: OK in 0.000 seconds
+[0m22:11:31.780652 [debug] [MainThread]: On master: Close
+[0m22:11:31.780788 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m22:11:31.780874 [debug] [MainThread]: Connection 'model.de_workspace_dbt.fct_daily_sales' was properly closed.
+[0m22:11:31.780965 [info ] [MainThread]: 
+[0m22:11:31.781061 [info ] [MainThread]: Finished running 1 table model in 0 hours 0 minutes and 0.14 seconds (0.14s).
+[0m22:11:31.781272 [debug] [MainThread]: Command end result
+[0m22:11:31.795264 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/kyreesullivan/de_workspace/pipelines/processing/dbt/target/manifest.json
+[0m22:11:31.796632 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/kyreesullivan/de_workspace/pipelines/processing/dbt/target/semantic_manifest.json
+[0m22:11:31.797750 [debug] [MainThread]: Wrote artifact OsiDocument to /Users/kyreesullivan/de_workspace/pipelines/processing/dbt/target/osi_document.json
+[0m22:11:31.800196 [debug] [MainThread]: Wrote artifact RunExecutionResult to /Users/kyreesullivan/de_workspace/pipelines/processing/dbt/target/run_results.json
+[0m22:11:31.800297 [info ] [MainThread]: 
+[0m22:11:31.800419 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m22:11:31.800508 [info ] [MainThread]: 
+[0m22:11:31.800610 [info ] [MainThread]: Done. PASS=1 WARN=0 ERROR=0 SKIP=0 NO-OP=0 REUSED=0 TOTAL=1
+[0m22:11:31.801957 [debug] [MainThread]: Resource report: {"command_name": "run", "command_success": true, "command_wall_clock_time": 0.4741238, "process_in_blocks": "0", "process_kernel_time": 0.143185, "process_mem_max_rss": "176340992", "process_out_blocks": "0", "process_user_time": 1.145953}
+[0m22:11:31.802104 [debug] [MainThread]: Command `dbt run` succeeded at 22:11:31.802076 after 0.47 seconds
+[0m22:11:31.802220 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10ad07950>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c66cb90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c822cc0>]}
+[0m22:11:31.802332 [debug] [MainThread]: Flushing usage events
+[0m22:11:31.896424 [debug] [MainThread]: An error was encountered while trying to flush usage events

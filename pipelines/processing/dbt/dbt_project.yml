@@ -1,0 +1,14 @@
+name: 'de_workspace_dbt'
+version: '1.0.0'
+config-version: 2
+profile: 'de_workspace'
+model-paths: ["models"]
+target-path: "target"
+clean-targets: ["target"]
+
+models:
+  de_workspace_dbt:
+    staging:
+      +materialized: view
+    marts:
+      +materialized: table
