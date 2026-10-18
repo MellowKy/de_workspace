@@ -47,7 +47,6 @@ df_sales = load_gold_data()
 if df_sales.empty:
     st.warning("Gold Delta Lake table is empty or uninitialized. Materialize pipeline assets first.")
 else:
-    # Sidebar Filters
     st.sidebar.header("Filter Options")
     currencies = st.sidebar.multiselect(
         "Select Currency",
@@ -57,7 +56,6 @@ else:
 
     filtered_df = df_sales[df_sales["currency"].isin(currencies)]
 
-    # KPI Summary Row
     col1, col2, col3, col4 = st.columns(4)
     total_rev = filtered_df["total_revenue"].sum()
     total_ord = filtered_df["total_orders"].sum()
@@ -70,7 +68,6 @@ else:
 
     st.markdown("---")
 
-    # Data Table and Visualization
     left_col, right_col = st.columns([1, 1])
 
     with left_col:
