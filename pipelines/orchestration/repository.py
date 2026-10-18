@@ -24,7 +24,7 @@ class TransformationError(Exception):
 def raw_orders_bronze() -> MaterializeResult:
     BRONZE_DELTA_PATH.mkdir(parents=True, exist_ok=True)
     DLQ_PATH.parent.mkdir(parents=True, exist_ok=True)
-    
+
     if STAGING_PATH.exists() and STAGING_PATH.stat().st_size > 0:
         with open(STAGING_PATH, "r") as f:
             incoming_payloads = [json.loads(line) for line in f if line.strip()]
@@ -61,7 +61,7 @@ def raw_orders_bronze() -> MaterializeResult:
             arrow_table,
             mode="append"
         )
-            
+
     return MaterializeResult(
         metadata={
             "valid_records_appended": len(valid_records),
@@ -73,7 +73,7 @@ def raw_orders_bronze() -> MaterializeResult:
 @asset(deps=[raw_orders_bronze], group_name="silver")
 def orders_silver() -> MaterializeResult:
     (PROJECT_ROOT / "data/silver").mkdir(parents=True, exist_ok=True)
-    
+
     res = subprocess.run(
         ["dbt", "run", "--select", "stg_orders", "--profiles-dir", str(DBT_DIR)],
         check=False,

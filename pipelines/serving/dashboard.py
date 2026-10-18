@@ -25,13 +25,13 @@ GOLD_DELTA_PATH = PROJECT_ROOT / "data/gold/daily_sales_delta"
 def load_gold_data():
     if not GOLD_DELTA_PATH.exists():
         return pd.DataFrame()
-    
+
     dt = DeltaTable(str(GOLD_DELTA_PATH))
     arrow_table = dt.to_pyarrow_table()  # noqa: F841
-    
+
     con = duckdb.connect()
     df = con.execute("""
-        SELECT 
+        SELECT
             CAST(sales_date AS DATE) AS sales_date,
             currency,
             total_orders,

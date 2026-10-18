@@ -26,14 +26,14 @@ def health_check():
 def get_daily_sales():
     if not GOLD_DELTA_PATH.exists():
         raise HTTPException(status_code=503, detail="Gold Delta table not initialized.")
-    
+
     try:
         dt = DeltaTable(str(GOLD_DELTA_PATH))
         arrow_table = dt.to_pyarrow_table()  # noqa: F841
-        
+
         con = duckdb.connect()
         results = con.execute("""
-            SELECT 
+            SELECT
                 CAST(sales_date AS VARCHAR) AS sales_date,
                 currency,
                 total_orders,
@@ -42,7 +42,7 @@ def get_daily_sales():
             ORDER BY sales_date DESC
         """).fetchall()
         con.close()
-        
+
         sales_data = [
             {
                 "sales_date": row[0],
@@ -52,7 +52,7 @@ def get_daily_sales():
             }
             for row in results
         ]
-        
+
         return {
             "status": "success",
             "record_count": len(sales_data),
