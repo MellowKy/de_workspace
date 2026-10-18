@@ -20,10 +20,12 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install ruff pytest pydantic deltalake pyarrow duckdb dagster dbt-duckdb fastapi uvicorn
+          pip install ruff pytest pydantic deltalake pyarrow duckdb dagster dbt-duckdb fastapi uvicorn streamlit
 
-      - name: Run Ruff Linter
+      - name: Run Ruff Code Quality Linter
         run: ruff check .
 
-      - name: Run Unit & Integration Tests
-        run: PYTHONPATH=. pytest tests/
+      - name: Run Contract & Integration Tests
+        env:
+          PYTHONPATH: .
+        run: pytest tests/ -v -W error

@@ -1,6 +1,8 @@
 from datetime import datetime
 from enum import Enum
+
 from pydantic import BaseModel, ConfigDict, Field, PositiveFloat
+
 
 class CurrencyEnum(str, Enum):
     USD = "USD"

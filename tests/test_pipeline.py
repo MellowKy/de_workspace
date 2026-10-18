@@ -1,6 +1,8 @@
 import pytest
 from pydantic import ValidationError
+
 from governance.contracts.order_event import OrderContract
+
 
 def test_order_contract_valid():
     payload = {

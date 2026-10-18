@@ -3,7 +3,7 @@ import subprocess
 import pyarrow as pa
 import duckdb
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timezone
 from pydantic import ValidationError
 from deltalake import DeltaTable, write_deltalake
 from dagster import asset, Definitions, MaterializeResult, in_process_executor
@@ -16,6 +16,9 @@ SILVER_DELTA_PATH = PROJECT_ROOT / "data/silver/orders_delta"
 GOLD_DELTA_PATH = PROJECT_ROOT / "data/gold/daily_sales_delta"
 DLQ_PATH = PROJECT_ROOT / "data/dlq/orders_dlq.jsonl"
 DBT_DIR = PROJECT_ROOT / "pipelines/processing/dbt"
+
+class TransformationError(Exception):
+    """Custom exception raised when dbt execution fails."""
 
 @asset(group_name="bronze")
 def raw_orders_bronze() -> MaterializeResult:
@@ -42,12 +45,12 @@ def raw_orders_bronze() -> MaterializeResult:
                 record_dict = validated.model_dump()
                 record_dict["timestamp"] = record_dict["timestamp"].isoformat()
                 valid_records.append(record_dict)
-            except (ValidationError, Exception) as err:
+            except (ValidationError, TypeError, ValueError) as err:
                 dlq_count += 1
                 dlq_record = {
                     "raw_payload": payload,
                     "error": str(err),
-                    "failed_at": datetime.utcnow().isoformat()
+                    "failed_at": datetime.now(timezone.utc).isoformat()
                 }
                 dlq_file.write(json.dumps(dlq_record) + "\n")
 
@@ -73,12 +76,13 @@ def orders_silver() -> MaterializeResult:
     
     res = subprocess.run(
         ["dbt", "run", "--select", "stg_orders", "--profiles-dir", str(DBT_DIR)],
+        check=False,
         cwd=str(DBT_DIR),
         capture_output=True,
         text=True
     )
     if res.returncode != 0:
-        raise Exception(f"dbt run failed:\n{res.stderr}\n{res.stdout}")
+        raise TransformationError(f"dbt run failed:\n{res.stderr}\n{res.stdout}")
 
     SILVER_DELTA_PATH.parent.mkdir(parents=True, exist_ok=True)
     con = duckdb.connect(str(PROJECT_ROOT / "data/silver/workspace.duckdb"))
@@ -94,12 +98,13 @@ def orders_silver() -> MaterializeResult:
 def daily_sales_gold() -> MaterializeResult:
     res = subprocess.run(
         ["dbt", "run", "--select", "fct_daily_sales", "--profiles-dir", str(DBT_DIR)],
+        check=False,
         cwd=str(DBT_DIR),
         capture_output=True,
         text=True
     )
     if res.returncode != 0:
-        raise Exception(f"dbt run failed:\n{res.stderr}\n{res.stdout}")
+        raise TransformationError(f"dbt run failed:\n{res.stderr}\n{res.stdout}")
 
     GOLD_DELTA_PATH.parent.mkdir(parents=True, exist_ok=True)
     con = duckdb.connect(str(PROJECT_ROOT / "data/silver/workspace.duckdb"))

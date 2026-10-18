@@ -7,6 +7,7 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from fastapi import FastAPI, HTTPException
 from deltalake import DeltaTable
+from deltalake.exceptions import TableNotFoundError
 import duckdb
 
 app = FastAPI(
@@ -28,7 +29,7 @@ def get_daily_sales():
     
     try:
         dt = DeltaTable(str(GOLD_DELTA_PATH))
-        arrow_table = dt.to_pyarrow_table()
+        arrow_table = dt.to_pyarrow_table()  # noqa: F841
         
         con = duckdb.connect()
         results = con.execute("""
@@ -57,5 +58,7 @@ def get_daily_sales():
             "record_count": len(sales_data),
             "data": sales_data
         }
-    except Exception as err:
-        raise HTTPException(status_code=500, detail=str(err))
+    except TableNotFoundError as err:
+        raise HTTPException(status_code=503, detail="Gold Delta table missing.") from err
+    except (duckdb.Error, RuntimeError) as err:
+        raise HTTPException(status_code=500, detail=str(err)) from err

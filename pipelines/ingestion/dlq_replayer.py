@@ -8,6 +8,7 @@ if str(PROJECT_ROOT) not in sys.path:
 import json
 import pyarrow as pa
 from deltalake import write_deltalake
+from pydantic import ValidationError
 from governance.contracts.order_event import OrderContract
 
 DLQ_PATH = PROJECT_ROOT / "data/dlq/orders_dlq.jsonl"
@@ -36,9 +37,9 @@ def replay_dlq_records(remediation_map: dict):
                 record_dict["timestamp"] = record_dict["timestamp"].isoformat()
                 remediated_dicts.append(record_dict)
                 print(f"Successfully remediated event: {evt_id}")
-            except Exception as err:
+            except (ValidationError, TypeError, ValueError) as err:
                 print(f"Remediation failed for event {evt_id}: {err}")
-                entry["error"] = f"Remediation Failure: {str(err)}"
+                entry["error"] = f"Remediation Failure: {err!s}"
                 remaining_dlq.append(entry)
         else:
             remaining_dlq.append(entry)

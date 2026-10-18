@@ -27,7 +27,7 @@ def load_gold_data():
         return pd.DataFrame()
     
     dt = DeltaTable(str(GOLD_DELTA_PATH))
-    arrow_table = dt.to_pyarrow_table()
+    arrow_table = dt.to_pyarrow_table()  # noqa: F841
     
     con = duckdb.connect()
     df = con.execute("""
